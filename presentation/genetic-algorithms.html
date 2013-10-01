@@ -1,0 +1,332 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Genetic Algorithms</title>
+  <style type="text/css">
+    body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #444;
+  background-color: #aaa;
+}
+
+#wrapper {
+  width: 850px;
+  height: 600px;
+  overflow: hidden;
+  margin: 80px auto 0 auto;
+  box-shadow: 3px 3px 3px #666;
+}
+
+/* styles for print layout */
+#wrapper.nohide {
+  overflow: auto;
+  height: auto;
+  box-shadow: none;
+}
+
+#wrapper.nohide .slide {
+  margin-bottom: 30px;
+}
+/* /styles */
+
+.slide {
+  width: auto;
+  height: 540px;
+  padding: 30px;
+  font-weight: 200;
+  font-size: 32px;
+  line-height: 44px;
+  background-color: #eee;
+}
+
+#controls {
+  width: 850px;
+  margin: -60px auto 0 auto;
+}
+
+#controls div {
+  width: 50px;
+  height: 50px;
+  padding: 5px 50px;
+  font-size: 36px;
+  background-color: #ccc;
+}
+
+#controls div:hover {
+  background-color: #bbb;
+  cursor: pointer;
+}
+
+#controls #prev {
+  float: left;
+  -webkit-border-top-right-radius: 20px;
+  -moz-border-radius-topright: 20px;
+  border-top-right-radius: 20px;
+
+  /* Fix selection bug */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#controls #next {
+  float: right;
+  text-align: right;
+  -webkit-border-top-left-radius: 20px;
+  -moz-border-radius-topleft: 20px;
+  border-top-left-radius: 20px;
+
+  /* Fix selection bug */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.slide h1 {
+  font-size: 100px;
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 30px;
+}
+
+.slide h2 {
+  font-size: 30px;
+  text-align: center;
+  font-weight: 200;
+}
+
+.slide h3 {
+  font-size: 45px;
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+.slide ul {
+  padding: 20px 0 0 60px;
+  font-weight: 200;
+  font-size: 32px;
+  line-height: 44px;
+}
+
+.slide .author h1.name {
+  font-size: 55px;
+  font-weight: 200;
+  text-align: center;
+  margin-top: 185px;
+  margin-bottom: 30px;
+}
+
+.slide .author h3 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 30px;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: #44a4dd;
+}
+
+a:hover {
+  color: #66b5ff;
+}
+
+code {
+  background-color: #ccc;
+}
+
+pre > code {
+  background-color: inherit;
+  font-size: 60%;
+  line-height: 1.3;
+}
+
+.hidden {
+  display: none;
+}
+
+
+    
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <section class="slide"><h1>GAs</h1>
+
+<h2>Genetic Algorithms</h2></section>
+    <section class="slide"><h3>What is a genetic algorithm?</h3>
+
+<ul>
+<li><a href="http://boxcar2d.com/">Example</a></li>
+<li>More formally:
+<ul><li>A form of evolutionary algorithm.</li>
+<li>Focus on search optimisation.</li>
+<li>Biologically inspired.</li></ul></li>
+</ul></section>
+    <section class="slide"><h3>How does a genetic algorithm work?</h3>
+
+<p>At a glance:</p>
+
+<ul>
+<li>Solutions are represented as <strong>chromosomes</strong>.</li>
+<li>Chromosomes are made up of a list of <strong>genes</strong>.</li>
+<li>An initial population of chromosomes is produced.</li>
+<li>Each chromosome is ranked.</li>
+<li>The best chromosomes are picked and carried on to the next <strong>generation</strong>.</li>
+<li>Evolution of new chromosomes.</li>
+</ul></section>
+    <section class="slide"><h3>Chromosome representation</h3>
+
+<ul>
+<li>The representation of chromosomes depends on the problem.</li>
+<li>Usually a list of bits, numbers or strings representing parts of the 
+problem.</li>
+</ul></section>
+    <section class="slide"><div class="author">
+  <h1 class="name">Alexander D Brown (adb9)</h1>
+  <h3 class="twitter">
+    <a href="http://twitter.com/" tabindex="-1"></a>
+  </h3>
+  <h3 class="url">
+    <a href="" tabindex="-1"></a>
+  </h3>
+</div>
+</section>
+</div>
+  <div id="controls">
+    <div id="prev">&larr;</div>
+    <div id="next">&rarr;</div>
+  </div>
+
+<script type="text/javascript">
+  /**
+ * Takes the last slide and places it at the front.
+ */
+function goBack() {
+  var wrapper = document.querySelector('#wrapper');
+  var lastSlide = wrapper.lastChild;
+  while (lastSlide != null && lastSlide.nodeType !== 1) {
+    lastSlide = lastSlide.previousSibling;
+  }
+
+  wrapper.removeChild(lastSlide);
+  wrapper.insertBefore(lastSlide, wrapper.firstChild);
+
+  updateURL();
+}
+
+/**
+ * Takes the first slide and places it at the end.
+ */
+function goForward() {
+  var wrapper = document.querySelector('#wrapper');
+  var firstSlide = wrapper.firstChild;
+  while (firstSlide != null && firstSlide.nodeType !== 1) {
+    firstSlide = firstSlide.nextSibling;
+  }
+
+  wrapper.removeChild(firstSlide);
+  wrapper.appendChild(firstSlide);
+
+  updateURL();
+}
+
+/**
+ * Updates the current URL to include a hashtag of the current page number.
+ */
+function updateURL() {
+  window.history.replaceState({} , null, '#' + currentPage());
+}
+
+/**
+ * Returns the current page number of the presentation.
+ */
+function currentPage() {
+  return document.querySelector('#wrapper .slide').dataset.page;
+}
+
+/**
+ * Returns a NodeList of each .slide element.
+ */
+function allSlides() {
+  return document.querySelectorAll('#wrapper .slide');
+}
+
+/**
+ * Give each slide a "page" data attribute.
+ */
+function setPageNumbers() {
+  var wrapper = document.querySelector('#wrapper');
+  var pages   = wrapper.querySelectorAll('section');
+  var page;
+
+  for (var i = 0; i < pages.length; ++i) {
+    page = pages[i];
+    page.dataset.page = i;
+  }
+}
+
+/**
+ * Go to the specified page of content.
+ */
+function goToPage(page) {
+  // Try to find the target slide.
+  var targetSlide = document.querySelector('#wrapper .slide[data-page="' + page + '"]');
+
+  // If it actually exists, go forward until we find it.
+  if (targetSlide) {
+    var numSlides = allSlides().length;
+
+    for (var i = 0; currentPage() != page && i < numSlides; i++) {
+      goForward();
+    }
+  }
+}
+
+window.onload = function () {
+
+  // Give each slide a "page" data attribute.
+  setPageNumbers();
+
+  // If the location hash specifies a page number, go to it.
+  var page = window.location.hash.slice(1);
+  if (page) goToPage(page);
+
+  document.onkeydown = function (e) {
+    var kc = e.keyCode;
+
+    // left, down, H, J, backspace - BACK
+    // up, right, K, L, space, enter - FORWARD
+    if (kc == 37 || kc == 40 || kc == 8 || kc == 72 || kc == 74) {
+      goBack();
+    } else if (kc == 38 || kc == 39 || kc == 13 || kc == 32 || kc == 75 || kc == 76) {
+      goForward();
+    }
+  }
+
+  if (document.querySelector('#next') && document.querySelector('#prev')) {
+    document.querySelector('#next').onclick = function (e) {
+      e.preventDefault();
+      goForward();
+    }
+
+    document.querySelector('#prev').onclick = function (e) {
+      e.preventDefault();
+      goBack();
+    }
+  }
+
+}
+
+</script>
+
+</body>
+</html>
