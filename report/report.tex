@@ -73,7 +73,7 @@ algorithm to come up with a ``good'' solution in a reasonable amount of time.
 
 Reproduction and mutation are an important part of genetic programming, and too
 of evolutionary programming. Without these parts the algorithm would quickly 
-reach a local optima for the initial population and would not improve past this.
+reach a local optimum for the initial population and would not improve past this.
 
 \subsection{Chromosome Representation}
 One of the key parts parts in implementing a genetic algorithm is the 
@@ -99,6 +99,27 @@ figure~\ref{fig:chromosome}.
 \end{figure}
 
 \subsection{Fitness Function}
+To fulfil the step of natural selection; the process of choosing the ``best''
+members of a population, there needs to be a way of evaluating each chromosome,
+such that they can be compared to one another.
+
+The function for doing so is known as a fitness function, which typically 
+returns either a single number or a list of numbers, depending on the problem.
+Each chromosome can then be ranked in order of fitness and the top members of
+a population can then be selected.
+
+As the value returned from a fitness function, with be specific to the domain it
+has be used within, it is necessary to rescale the fitness value to ensure 
+uniformity when genetic algorithms are applied over several different domains
+at the same time. %TODO citation needed.
+
+
+\subsection{Selection}
+Selection simulates the ``survival of the fittest'' nature of biology. However,
+it is beneficial not to keep some lesser performing members of the population
+to avoid getting trapped in local optimum. Most selection algorithms will 
+introduce an element of randomness into the selection to deal with this.
+
 
 
 \newpage
