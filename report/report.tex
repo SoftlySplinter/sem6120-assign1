@@ -11,10 +11,25 @@
 \newpage
 \section{Introduction}
 Genetic algorithms are a biologically-inspired approach to heuristic search 
-which mimic natural selection 
+which mimic natural selection. Unlike many other evolutionary strategies and
+evolutionary programming, they are not designed to solve a specific problem,
+but are designed to solve the problem of optimisation which is made difficult
+by substantial complexity and uncertainty\cite{Holland1992Adaptation}.
 
-\nocite{Man1996Genetic}
-\nocite{Mitchell1996Introduction}
+The complexity of the task should make it such that discovering an optimum
+solution is a long, maybe even impossible, task. At the same time the 
+uncertainty needs to be reduced so that the knowledge of \textit{available}
+options can be increased.
+
+% TODO improve this section as its mainly from the reference.
+The initial design for a genetic algorithm was a method for moving from one
+population of chromosomes to another using a form of natural selection. This
+algorithm also included methods for crossover, mutation and inversion. This
+idea of having a large population was the distinguishing feature from any past
+attempts which had only considered the parent and one offspring, where the 
+offspring was simply a mutation of the parent\cite{Mitchell1996Introduction}.
+
+\newpage
 \bibliographystyle{plain}
 \bibliography{citations}
 \end{document}
