@@ -1,11 +1,9 @@
 import random
 
-BOUND=25
-
 class Node:
   def __init__(self, id, graph):
-    self.x = int(random.random() * BOUND)
-    self.y = int(random.random() * BOUND)
+    self.x = int(random.random() * graph.size)
+    self.y = int(random.random() * graph.size)
     self.id = id
 
   def distance(self, other):
@@ -16,9 +14,10 @@ class Node:
 
 class Graph:
   nodes = None
-  def __init__(self, nodes, **kwargs):
+  def __init__(self, nodes, size, **kwargs):
     if 'seed' in kwargs:
       random.seed(kwargs['seed'])
+    self.size = size
     self.nodes = [Node(i, self) for i in xrange(nodes)]
 
   def distance(self, n1, n2):
@@ -29,8 +28,8 @@ class Graph:
 
   def __str__(self):
     s = ""
-    for x in xrange(0, BOUND):
-      for y in xrange(0, BOUND):
+    for x in xrange(0, self.size):
+      for y in xrange(0, self.size):
         added = False
         for node in self.nodes:
           if node.x == x and node.y == y:
@@ -40,7 +39,3 @@ class Graph:
           s += " "
       s += "\n"
     return s
-
-if __name__ == "__main__":
-  g = Graph(9)
-  print str(g)
