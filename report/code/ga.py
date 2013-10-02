@@ -110,18 +110,17 @@ class GA:
    return Chromosome(genes, self.graph)
 
 if __name__ == "__main__":
-  graph = Graph(25, 25, seed="genetic-algorithm")
+  graph = Graph(10, 25, seed="ga")
 
   # Reset the random seed from graph creation.
   random.seed()
-  ga = GA(graph, 25)
+  ga = GA(graph, 50)
   avg = []
   improving = True
   while improving:
     best = ga.run()
-    print "Current best is:" + str(best)
     avg.append(Chromosome.fitness(best))
-    if len(avg) > 50:
+    if len(avg) > 100:
       median = avg[len(avg)/2]
       improving = Chromosome.fitness(best) != median
     
