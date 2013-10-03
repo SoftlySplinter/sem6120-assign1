@@ -26,6 +26,10 @@ class Chromosome:
   def make_valid(self, genes):
     missing = [i for i in xrange(len(genes)) if i not in genes]
     double = [i for i in xrange(len(genes)) if genes.count(i) > 1]
+
+    random.shuffle(missing)
+    random.shuffle(double)
+
     for i in double:
       genes[genes.index(i)] = missing.pop()
     return genes
@@ -43,7 +47,7 @@ class Chromosome:
                 for (n1, n2) in zip(c.genes, c.genes[1:])])
       
 
-class GA:
+class BasicGA(object):
   def __init__(self, graph, pop_size):
     self.graph = graph
     self.pop_size = pop_size
@@ -53,7 +57,6 @@ class GA:
 
   def run(self):
     """Runs the GA once."""
-    self.population = self.rank(self.population)
     best = self.select()
     offspring = self.crossover(best)
     mutants = self.mutate(best)
@@ -66,15 +69,10 @@ class GA:
     self.population = [Chromosome.create(self.graph) 
                        for i in xrange(self.pop_size)]
 
-  @classmethod
-  def rank(cls, population):
-    """Ranks a population in order of fitness."""
-    return sorted(population, key=Chromosome.fitness)
-
   def select(self):
     """Selects the best individuals from a population."""
     retained_pop = self.pop_size - self.mutants_rate - self.crossover_rate
-    return self.population[0:retained_pop]
+    return sorted(self.population, key=Chromosome.fitness)[0:retained_pop]
 
   def crossover(self, population):
     """Performs crossover on a certain amount of the population."""
@@ -109,22 +107,45 @@ class GA:
    genes[pos2] = temp
    return Chromosome(genes, self.graph)
 
+class TournamentGA(BasicGA):
+  def __init__(self, graph, num, tournament_size):
+    super(TournamentGA, self).__init__(graph, num)
+    self.tournament_size = tournament_size
+
+  def select(self):
+    """
+    Selects the best members of the population using a tournament-based 
+    algorithm.
+    """
+    retained_pop = self.pop_size - self.mutants_rate - self.crossover_rate
+    temp = self.population
+    best = []
+    while len(best) != retained_pop:
+      tournament = random.sample(temp, min(self.tournament_size, len(temp)))
+      b = min(tournament, key=Chromosome.fitness)
+      best.append(b)
+    return best
+    
+
 if __name__ == "__main__":
-  graph = Graph(10, 25, seed="ga")
+  graph = Graph(15, 25, seed="ga")
 
   # Reset the random seed from graph creation.
   random.seed()
-  ga = GA(graph, 50)
-  avg = []
-  improving = True
-  while improving:
-    best = ga.run()
-    avg.append(Chromosome.fitness(best))
-    if len(avg) > 100:
-      median = avg[len(avg)/2]
-      improving = Chromosome.fitness(best) != median
-    
-      
+  gas = [BasicGA(graph, 10), TournamentGA(graph, 10, 2)]
 
-  print "No longer improving, best found: " + str(best)
+  for ga in gas:
+    avg = []
+    improving = True
+    runs = 0
+    while improving:
+      runs += 1
+      best = ga.run()
+      avg.append(Chromosome.fitness(best))
+      if len(avg) > 1000:
+        median = avg[len(avg)/2]
+        improving = Chromosome.fitness(best) != median
+    print "{} found best: {} in {} runs".format(ga.__class__.__name__, 
+                                                str(best),
+                                                runs)
  
