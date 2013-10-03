@@ -21,8 +21,6 @@
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
   keywordstyle=\color{blue},       % keyword style
   morekeywords={*,...},            % if you want to add more keywords to the set
-  numbersep=5pt,                   % how far the line-numbers are from the code
-  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
   rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
@@ -103,7 +101,8 @@ algorithm to come up with a ``good'' solution in a reasonable amount of time.
 
 Reproduction and mutation are an important part of genetic programming, and too
 of evolutionary programming. Without these parts the algorithm would quickly 
-reach a local optimum for the initial population and would not improve past this.
+reach a local optimum for the initial population and would not improve past 
+this.
 
 \subsection{Chromosome Representation}
 One of the key parts parts in implementing a genetic algorithm is the 
@@ -149,6 +148,51 @@ Selection simulates the ``survival of the fittest'' nature of biology. However,
 it is beneficial not to keep some lesser performing members of the population
 to avoid getting trapped in local optimum. Most selection algorithms will 
 introduce an element of randomness into the selection to deal with this.
+
+This report will discuss the effects of different selection algorithms in 
+Section~\ref{sec:selection-algorithms}.
+
+
+
+\newpage
+\section{The Effects of Selection Algorithms on GAs}
+\label{sec:selection-algorithms}
+
+The selection of the ``best'' individuals is an important step in genetic
+algorithms and as such several selection algorithms have been put forward.
+
+The simplest is to just pick the top individuals of a generation to carry on
+their genes in the next generation, either through directly copying them, 
+crossover or mutation.
+
+This has its flaws and doesn't mirror the biological process of evolution. The
+main flaw of this approach is that it can be beneficial to include weaker 
+members of a population to avoid getting stuck in local optimum. By including
+other, seemingly worse, members of a population, the effects of crossover and
+mutation can overcome this problem.
+
+Another, commonly used, technique is to use a tournament-based selection 
+algorithm, which involves selecting the best member from a pool made up of
+random members of the population. The size of the pool has a big effect on the
+selection of individuals, and is generally inversely proportional to the
+number of weaker members selected.
+
+Tournament selection is one of the closest to biological natural selection,
+and has the benefits that it is efficient, especially on parallel 
+architectures.
+
+Another popular selection algorithm is roulette-wheel selection, where the
+chance a particular individual has of being selected is proportional to its
+fitness. Those with a higher fitness have a higher probability of being 
+selected. The equation used to calculate the probability is shown in 
+equation~\ref{eq:roulette}, where $i$ is the individual in question, $f_x$ is
+the fitness of individual $x$ and $N$ is the number of individuals in the 
+population.
+
+\begin{equation}
+p_i = \frac{f_i}{\sum^N_{j=1}f_j}
+\label{eq:roulette}
+\end{equation}
 
 
 
