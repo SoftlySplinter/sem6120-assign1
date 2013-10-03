@@ -1,8 +1,8 @@
 import random, math, time
 from graph import Graph
 
-MUTATION = 0.1
-CROSSOVER = 0.3
+MUTATION = 0.001
+CROSSOVER = 0.6
 
 class Chromosome:
   @classmethod
@@ -34,7 +34,6 @@ class Chromosome:
       genes[genes.index(i)] = missing.pop()
     return genes
     
-
   def __str__(self):
     return "{} - {}".format(self.genes, Chromosome.fitness(self))
 
@@ -48,12 +47,12 @@ class Chromosome:
       
 
 class BasicGA(object):
-  def __init__(self, graph, pop_size):
+  def __init__(self, graph, population):
     self.graph = graph
-    self.pop_size = pop_size
-    self.mutants_rate = int(math.ceil(pop_size * MUTATION))
-    self.crossover_rate = int(math.ceil(pop_size * CROSSOVER))
-    self.gen_pop()
+    self.pop_size = len(population)
+    self.population = population
+    self.mutants_rate = int(math.ceil(self.pop_size * MUTATION))
+    self.crossover_rate = int(math.ceil(self.pop_size * CROSSOVER))
 
   def run(self):
     """Runs the GA once."""
@@ -63,11 +62,6 @@ class BasicGA(object):
     cur_best = self.population[0]
     self.population = best + offspring + mutants
     return cur_best
-
-  def gen_pop(self):
-    """Generates a new population."""
-    self.population = [Chromosome.create(self.graph) 
-                       for i in xrange(self.pop_size)]
 
   def select(self):
     """Selects the best individuals from a population."""
@@ -128,11 +122,12 @@ class TournamentGA(BasicGA):
     
 
 if __name__ == "__main__":
-  graph = Graph(15, 25, seed="ga")
+  graph = Graph(25, 10, seed="genetic-algorithm")
 
   # Reset the random seed from graph creation.
-  random.seed()
-  gas = [BasicGA(graph, 10), TournamentGA(graph, 10, 2)]
+  #random.seed()
+  pop = [Chromosome.create(graph) for _ in xrange(100)]
+  gas = [BasicGA(graph, pop), TournamentGA(graph, pop, 2), TournamentGA(graph, pop, 10)]
 
   for ga in gas:
     avg = []
@@ -142,9 +137,9 @@ if __name__ == "__main__":
       runs += 1
       best = ga.run()
       avg.append(Chromosome.fitness(best))
-      if len(avg) > 1000:
-        median = avg[len(avg)/2]
-        improving = Chromosome.fitness(best) != median
+      if len(avg) > 100:
+        median = avg[len(avg)/2 + 1]
+        improving = Chromosome.fitness(best) != median and len(avg) < 10000
     print "{} found best: {} in {} runs".format(ga.__class__.__name__, 
                                                 str(best),
                                                 runs)
