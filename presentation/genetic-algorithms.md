@@ -34,16 +34,31 @@ At a glance:
 
 --
 
-### Natural Selection
-
-* Select the best suited individuals from a population.
-* Based on a fitness function applied to chromosomes.
-* Select the best individuals based on this fitness function.
-
---
-
 ### Selection
 
 * One of the key parts of a GA.
 * To generate good offspring a method of selecting good parents is required.
-* Three 
+* Several forms of selection.
+
+--
+
+### Roulette Wheel Selection
+
+* The probability of being chose is proportional to the fitness of the 
+  individual.
+
+<center><img src="img/roulette-wheel.png" /></center>
+
+--
+
+### Tournament Selection
+
+* Population split randomly into pools and the best individual in a   pool is 
+  selected.
+* Can be optimised for parallel processing.
+
+<center><img src="img/tournament.png" /></center>
+
+--
+
+
