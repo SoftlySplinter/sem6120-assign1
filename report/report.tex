@@ -30,11 +30,30 @@
   tabsize=2,                       % sets default tabsize to 2 spaces
 }
 
+
+\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}} % Generic publisher logo
+\newcommand*{\titleGM}{\begingroup % Create the command for including the title page in the document
+\hbox{ % Horizontal box
+\hspace*{0.2\textwidth} % Whitespace to the left of the title page
+\rule{1pt}{\textheight} % Vertical line
+\hspace*{0.05\textwidth} % Whitespace between the vertical line and title page text
+\parbox[b]{0.75\textwidth}{ % Paragraph box which restricts text to less than the width of the page
+
+{\noindent\Huge\bfseries Genetic Algorithms}\\[2\baselineskip] % Title
+{\large \textit{SEM6120 - Assignment 1}}\\[4\baselineskip] % Tagline or further description
+{\Large \textsc{Alexander D Brown (adb9)}} % Author name
+
+\vspace{0.5\textheight} % Whitespace between the title block and the publisher
+}}
+\endgroup}
+
+
 \title{Genetic Algorithms}
 \author{Alexander D Brown (adb9)}
 
 \begin{document}
-\maketitle
+\titleGM % This command includes the title page
+%\maketitle
 \tableofcontents
 
 \newpage
@@ -284,6 +303,7 @@ A simple python implementation is shown in figure~\ref{lst:ga.py}.
                  label=lst:graph.py]{code/graph.py}
 
 
+\newpage
 \bibliographystyle{plain}
 \bibliography{citations}
 \end{document}
