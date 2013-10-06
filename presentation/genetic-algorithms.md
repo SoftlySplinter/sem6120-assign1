@@ -3,11 +3,13 @@ author:
   name: "Alexander D Brown (adb9)"
 output: genetic-algorithms.html
 controls: true
+layout: template/layout.mustache
+style: template/ga.css
 
 --
 
-# GAs
-## Genetic Algorithms
+# Genetic Algorithms
+## SEM6120 Assignment 1
 
 --
 
@@ -47,7 +49,7 @@ At a glance:
 * The probability of being chose is proportional to the fitness of the 
   individual.
 
-<center><img src="img/roulette-wheel.png" /></center>
+![Roulette Wheel Selection](img/roulette-wheel.png "Roulette Wheel Selection")
 
 --
 
@@ -57,7 +59,7 @@ At a glance:
   selected.
 * Can be optimised for parallel processing.
 
-<center><img src="img/tournament.png" /></center>
+![Tournament Selection](./img/tournament.png "Tournament Selection")
 
 --
 
