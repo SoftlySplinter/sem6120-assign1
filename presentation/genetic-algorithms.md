@@ -3,6 +3,8 @@ author:
   name: "Alexander D Brown (adb9)"
 output: genetic-algorithms.html
 controls: true
+layout: template/layout.mustache
+style: template/ga.css
 
 --
 
@@ -47,9 +49,7 @@ At a glance:
 * The probability of being chose is proportional to the fitness of the 
   individual.
 
-<center>
-  ![Roulette Wheel Selection](img/roulette-wheel.png "Roulette Wheel Selection")
-</center>
+![Roulette Wheel Selection](img/roulette-wheel.png "Roulette Wheel Selection")
 
 --
 
@@ -59,9 +59,7 @@ At a glance:
   selected.
 * Can be optimised for parallel processing.
 
-<center>
-  ![Tournament Selection](./img/tournament.png "Tournament Selection")
-</center>
+![Tournament Selection](./img/tournament.png "Tournament Selection")
 
 --
 
