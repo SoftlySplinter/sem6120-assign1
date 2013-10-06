@@ -137,8 +137,8 @@ returns either a single number or a list of numbers, depending on the problem.
 Each chromosome can then be ranked in order of fitness and the top members of
 a population can then be selected.
 
-As the value returned from a fitness function, with be specific to the domain it
-has be used within, it is necessary to rescale the fitness value to ensure 
+As the value returned from a fitness function, with be specific to the domain 
+it has be used within, it is necessary to rescale the fitness value to ensure 
 uniformity when genetic algorithms are applied over several different domains
 at the same time. %TODO citation needed.
 
@@ -152,6 +152,18 @@ introduce an element of randomness into the selection to deal with this.
 This report will discuss the effects of different selection algorithms in 
 Section~\ref{sec:selection-algorithms}.
 
+\subsection{Crossover}
+% Talk about methods of crossover
+% - Crossover point
+% - Mask-based crossover
+% - Other strategies (sexual, etc.) 
+
+\subsection{Mutation}
+% Talk about methods of mutation
+% - Flipping bits/values
+
+\subsection{Termination}
+% Talk about termination criteria
 
 
 \newpage
@@ -194,6 +206,69 @@ p_i = \frac{f_i}{\sum^N_{j=1}f_j}
 \label{eq:roulette}
 \end{equation}
 
+There have been studies into the effects of different selection algorithms on 
+genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
+four methods of selection; proportional reproduction, ranking selection,
+tournament selection and the GENITOR algorithm.%TODO cite the GENITOR.
+
+They analysed each selection scheme in terms of:
+
+\begin{enumerate}
+\item growth ratio; the expected ratio for the members of the best class to the
+umber of members of the population.
+\item Takeover time; the approximate number of generations it takes
+to converge, this gives an idea of how long it would take before mutation,
+rather than crossover, becomes the primary method for exploring the search
+space. 
+\item Time complexity; the standard big O measure for time complexity.
+\end{enumerate}
+
+It was found that linear ranking and binary tournament (a tournament of only
+two individuals) selection had similar growth rates, but that tournament 
+selection with larger pool sizes had higher growth rates, though a non-linear
+ranking function can also achieve this.
+
+Takeover times all converged in around $O(log\;n)$ generations. Most 
+interestingly the time complexities had a large range, from $O(n^2)$ to $O(n)$,
+with tournament selection being an $O(n)$. This is particularly interesting as
+tournament selection is a very easy algorithm to make parallel, this fits in
+with genetic algorithms nicely as they improve drastically from parallel 
+implementation.
+
+These results should be taken with some scepticism as they are formulated from
+the pure mathematics of the selection techniques and not from running 
+experiments and the authors even mention that it is only designed as a simple 
+method to better understand the \textit{expected} behaviour and suggest looking
+at better methods, citing the inherently noisy nature of genetic algorithms.
+
+\subsection{Genetic Drift}
+Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} defined a method of 
+analysing selection schemes using genetic drift, a term borrowed from biology,
+which describes the change in frequency of an allele (gene variation) through
+random sampling of the population.
+
+Genetic drift is a phenomenon observed in genetic algorithms due to the nature
+of selection and, unlike analysis methods like convergence time, leads to a
+exact analytical solution. Though previous attempts to calculate genetic drift
+were often approximations or difficult to generalise to other cases, according
+to the authors.
+
+In genetic algorithms, genetic drift is a measure of the change in fitness
+variation within a population and is worked out using probabilistic analysis of
+the selection scheme. The inherent problem with this is that genetic algorithms
+are a form of subsymbolic learning, which is very difficult to apply 
+probabilistic methods to, due to the randomness used within them.
+
+The authors attempt to deal this by using results from experiments averaged 
+over 100,000 runs. Again though, a lot will depend on the nature of the 
+problem, the representation of chromosomes and even the way in which the
+selection scheme is implemented. Like with the work of Goldberg and Deb, this 
+only provides an indication of the performance of a selection scheme, rather
+than a full view. It does, however, seem to give some useful insights into 
+different selection schemes and may help rule out less useful selection 
+schemes.
+
+
 
 
 \newpage
@@ -201,7 +276,8 @@ p_i = \frac{f_i}{\sum^N_{j=1}f_j}
 A simple python implementation is shown in figure~\ref{lst:ga.py}.
 
 \lstinputlisting[language=python, 
-                 caption=A Python implementation of a simple Genetic Algorithm, 
+                 caption=A Python implementation of a simple Genetic 
+                         Algorithm, 
                  label=lst:ga.py]{code/ga.py}
 \lstinputlisting[language=python, 
                  caption=The Graph Code for listing~\ref{lst:ga.py}, 

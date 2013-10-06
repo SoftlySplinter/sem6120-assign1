@@ -177,19 +177,37 @@ pre > code {
 
 <ul>
 <li>Solutions are represented as <strong>chromosomes</strong>.</li>
-<li>Chromosomes are made up of a list of <strong>genes</strong>.</li>
 <li>An initial population of chromosomes is produced.</li>
 <li>Each chromosome is ranked.</li>
 <li>The best chromosomes are picked and carried on to the next <strong>generation</strong>.</li>
 <li>Evolution of new chromosomes.</li>
+<li>Repeat until finished.</li>
 </ul></section>
-    <section class="slide"><h3>Chromosome representation</h3>
+    <section class="slide"><h3>Selection</h3>
 
 <ul>
-<li>The representation of chromosomes depends on the problem.</li>
-<li>Usually a list of bits, numbers or strings representing parts of the 
-problem.</li>
+<li>One of the key parts of a GA.</li>
+<li>To generate good offspring a method of selecting good parents is required.</li>
+<li>Several forms of selection.</li>
 </ul></section>
+    <section class="slide"><h3>Roulette Wheel Selection</h3>
+
+<ul>
+<li>The probability of being chose is proportional to the fitness of the 
+individual.</li>
+</ul>
+
+<p><center><img src="img/roulette-wheel.png" /></center></p></section>
+    <section class="slide"><h3>Tournament Selection</h3>
+
+<ul>
+<li>Population split randomly into pools and the best individual in a   pool is 
+selected.</li>
+<li>Can be optimised for parallel processing.</li>
+</ul>
+
+<p><center><img src="img/tournament.png" /></center></p></section>
+    <section class="slide"></section>
     <section class="slide"><div class="author">
   <h1 class="name">Alexander D Brown (adb9)</h1>
   <h3 class="twitter">
