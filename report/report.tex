@@ -209,16 +209,35 @@ the two parents, as shown in figure~\ref{fig:crossover-mask}
 \label{fig:crossover-mask}
 \end{figure}
 
-
+This can lead to problems if the representation of chromosomes is complex; if,
+for example, each gene represents a node in the travelling salesman problem
+then crossover can produce routes which are invalid as nodes may be duplicated
+due to this process.
 
 \subsection{Mutation}
 % Talk about methods of mutation
 % - Flipping bits/values
 
+Another method of getting variation into a population is mutation, the random
+change of genes within a chromosome. In genetic algorithms this is typically
+replicated by flipping a single bit in the chromosome.
+
+As with crossover, mutation must be handled carefully with complex chromosome
+representations as it may lead to invalid chromosomes. The rate of mutation 
+is usually kept low to avoid large amounts of variance.
+
 
 \subsection{Termination}
 % Talk about termination criteria
 
+The final problem with genetic algorithms is the problem of deciding when a 
+result is good enough. Usually the implementation has some form of termination
+criteria, this may be a time limit or number of generations or may be something
+more complex like when the algorithm no longer improves in fitness greatly.
+
+Termination criteria is very specific to the problem domain. Genetic algorithms
+are very good at giving an approximate answer and typically bad at finding the
+exact optimum solution.
 
 \FloatBarrier
 
@@ -262,7 +281,8 @@ p_i = \frac{f_i}{\sum^N_{j=1}f_j}
 \label{eq:roulette}
 \end{equation}
 
-\subsection{Goldberg and Deb}
+
+\subsection{Comparing Selection Schemes}
 There have been studies into the effects of different selection algorithms on 
 genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
 four methods of selection; proportional reproduction, ranking selection,
