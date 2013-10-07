@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[section]{placeins}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -101,8 +102,7 @@ There are many other forms of both evolutionary and genetic algorithms which
 this report with mention in later sections.
 
 
-\newpage
-\section{Basic Genetic Algorithm Principals}
+\subsection{Genetic Algorithms}
 The basic principals of genetic algorithms are to represent candidate solutions
 as a population of chromosomes, from this population the fittest members can be
 picked out and used in the next generation and to create new member of the 
@@ -179,16 +179,51 @@ Section~\ref{sec:selection-algorithms}.
 % - Mask-based crossover
 % - Other strategies (sexual, etc.) 
 
+Crossover is the algorithmic approach to replicating biological reproduction
+and is key to genetic algorithms as it will produce new, unseen, offspring
+based on selected members of the population.
+
+In its simplest form crossover is the process of taking one chromosome and
+splicing it with another. This can be done in several ways, but the most common
+is to choose a random point, known as the \textit{crossover point}. The
+offspring consists of all the genes from the first parent up until the 
+crossover point, the remaining genes then come from the second parent. As shown
+in figure~\ref{fig:crossover-point}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.45]{img/crossover.png}
+\caption{Crossover of parents $p1$ and $p2$ at crossover point $c$, where 
+         $c=5$, resulting in offspring $o1$.} 
+\label{fig:crossover-point}
+\end{figure}
+
+More complex methods revolve around the idea of having multiple crossover 
+points and eventually it becomes more efficient to use a binary mask over
+the two parents, as shown in figure~\ref{fig:crossover-mask}
+
+\begin{figure}[h]
+\includegraphics[scale=0.45]{img/mask-crossover.png}
+\caption{Crossover of parents $p1$ and $p2$ using a binary mask, resulting in
+         offspring $o1$}
+\label{fig:crossover-mask}
+\end{figure}
+
+
+
 \subsection{Mutation}
 % Talk about methods of mutation
 % - Flipping bits/values
+
 
 \subsection{Termination}
 % Talk about termination criteria
 
 
+\FloatBarrier
+
 \newpage
-\section{The Effects of Selection Algorithms on GAs}
+\section{Previous Research into Selection Schemes}
 \label{sec:selection-algorithms}
 
 The selection of the ``best'' individuals is an important step in genetic
@@ -227,6 +262,7 @@ p_i = \frac{f_i}{\sum^N_{j=1}f_j}
 \label{eq:roulette}
 \end{equation}
 
+\subsection{Goldberg and Deb}
 There have been studies into the effects of different selection algorithms on 
 genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
 four methods of selection; proportional reproduction, ranking selection,
@@ -293,17 +329,7 @@ schemes.
 
 
 \newpage
-\section{Code Example}
-A simple python implementation is shown in figure~\ref{lst:ga.py}.
-
-\lstinputlisting[language=python, 
-                 caption=A Python implementation of a simple Genetic 
-                         Algorithm, 
-                 label=lst:ga.py]{code/ga.py}
-\lstinputlisting[language=python, 
-                 caption=The Graph Code for listing~\ref{lst:ga.py}, 
-                 label=lst:graph.py]{code/graph.py}
-
+\section{Evaluation of Research}
 
 \newpage
 \bibliographystyle{plain}
