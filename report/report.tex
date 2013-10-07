@@ -312,11 +312,6 @@ tournament selection is a very easy algorithm to make parallel, this fits in
 with genetic algorithms nicely as they improve drastically from parallel 
 implementation.
 
-These results should be taken with some scepticism as they are formulated from
-the pure mathematics of the selection techniques and not from running 
-experiments and the authors even mention that it is only designed as a simple 
-method to better understand the \textit{expected} behaviour and suggest looking
-at better methods, citing the inherently noisy nature of genetic algorithms.
 
 \subsection{Genetic Drift}
 Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} defined a method of 
@@ -332,9 +327,27 @@ to the authors.
 
 In genetic algorithms, genetic drift is a measure of the change in fitness
 variation within a population and is worked out using probabilistic analysis of
-the selection scheme. The inherent problem with this is that genetic algorithms
-are a form of subsymbolic learning, which is very difficult to apply 
-probabilistic methods to, due to the randomness used within them.
+the selection scheme. 
+%TODO MOAR!
+
+
+
+\newpage
+\section{Evaluation of Research}
+
+The results from Goldberg and Deb\cite{Goldberg1991Comparative} should be taken
+with some scepticism as they are formulated from the pure mathematics of the 
+selection techniques and not from running experiments and the authors even 
+mention that it is only designed as a simple method to better understand the 
+\textit{expected} behaviour and suggest looking at better methods, citing the 
+inherently noisy nature of genetic algorithms.
+%TODO MOAR!
+
+
+The work of Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} also runs 
+into this inherent problem of genetic algorithms being a form of subsymbolic 
+learning, which is very difficult to apply probabilistic methods to, due to the
+randomness used within them.
 
 The authors attempt to deal this by using results from experiments averaged 
 over 100,000 runs. Again though, a lot will depend on the nature of the 
@@ -345,11 +358,6 @@ than a full view. It does, however, seem to give some useful insights into
 different selection schemes and may help rule out less useful selection 
 schemes.
 
-
-
-
-\newpage
-\section{Evaluation of Research}
 
 \newpage
 \bibliographystyle{plain}
