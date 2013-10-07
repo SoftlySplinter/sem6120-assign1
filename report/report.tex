@@ -3,38 +3,54 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[section]{placeins}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 
 \lstset{ %
-  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
-  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-  breaklines=true,                 % sets automatic line breaking
-  captionpos=b,                    % sets the caption-position to bottom
-  commentstyle=\color{mygreen},    % comment style
-  deletekeywords={...},            % if you want to delete keywords from the given language
-  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-  keywordstyle=\color{blue},       % keyword style
-  morekeywords={*,...},            % if you want to add more keywords to the set
-  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-  showstringspaces=false,          % underline spaces within strings only
-  showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
-  stringstyle=\color{mymauve},     % string literal style
-  tabsize=2,                       % sets default tabsize to 2 spaces
+  backgroundcolor=\color{white},
+  basicstyle=\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{mygreen},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stepnumber=2,
+  stringstyle=\color{mymauve},
+  tabsize=2,
 }
+
+
+\newcommand*{\titleGM}{\begingroup
+\hbox{ 
+\hspace*{0.2\textwidth} 
+\rule{1pt}{\textheight} 
+\hspace*{0.05\textwidth} 
+\parbox[b]{0.75\textwidth}{ 
+
+{\noindent\Huge\bfseries Genetic Algorithms}\\[2\baselineskip] % Title
+{\large \textit{SEM6120 - Assignment 1}}\\[4\baselineskip] % Tagline or further description
+{\Large \textsc{Alexander D Brown (adb9)}} % Author name
+
+\vspace{0.5\textheight} 
+}}
+\endgroup}
+
 
 \title{Genetic Algorithms}
 \author{Alexander D Brown (adb9)}
 
 \begin{document}
-\maketitle
+\titleGM 
 \tableofcontents
 
 \newpage
@@ -86,8 +102,7 @@ There are many other forms of both evolutionary and genetic algorithms which
 this report with mention in later sections.
 
 
-\newpage
-\section{Basic Genetic Algorithm Principals}
+\subsection{Genetic Algorithms}
 The basic principals of genetic algorithms are to represent candidate solutions
 as a population of chromosomes, from this population the fittest members can be
 picked out and used in the next generation and to create new member of the 
@@ -149,7 +164,13 @@ it is beneficial not to keep some lesser performing members of the population
 to avoid getting trapped in local optimum. Most selection algorithms will 
 introduce an element of randomness into the selection to deal with this.
 
-This report will discuss the effects of different selection algorithms in 
+Simple methods for selection typically involve randomly selecting individuals,
+giving those individuals with higher fitness greater chance of being selected.
+While others take inspiration from biology by making members of the population
+complete or assign individuals genders to imitate sexual reproduction.
+
+This report will discuss different selection algorithms in 
+and the methods suggested for evaluating them in 
 Section~\ref{sec:selection-algorithms}.
 
 \subsection{Crossover}
@@ -158,16 +179,70 @@ Section~\ref{sec:selection-algorithms}.
 % - Mask-based crossover
 % - Other strategies (sexual, etc.) 
 
+Crossover is the algorithmic approach to replicating biological reproduction
+and is key to genetic algorithms as it will produce new, unseen, offspring
+based on selected members of the population.
+
+In its simplest form crossover is the process of taking one chromosome and
+splicing it with another. This can be done in several ways, but the most common
+is to choose a random point, known as the \textit{crossover point}. The
+offspring consists of all the genes from the first parent up until the 
+crossover point, the remaining genes then come from the second parent. As shown
+in figure~\ref{fig:crossover-point}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.45]{img/crossover.png}
+\caption{Crossover of parents $p1$ and $p2$ at crossover point $c$, where 
+         $c=5$, resulting in offspring $o1$.} 
+\label{fig:crossover-point}
+\end{figure}
+
+More complex methods revolve around the idea of having multiple crossover 
+points and eventually it becomes more efficient to use a binary mask over
+the two parents, as shown in figure~\ref{fig:crossover-mask}
+
+\begin{figure}[h]
+\includegraphics[scale=0.45]{img/mask-crossover.png}
+\caption{Crossover of parents $p1$ and $p2$ using a binary mask, resulting in
+         offspring $o1$}
+\label{fig:crossover-mask}
+\end{figure}
+
+This can lead to problems if the representation of chromosomes is complex; if,
+for example, each gene represents a node in the travelling salesman problem
+then crossover can produce routes which are invalid as nodes may be duplicated
+due to this process.
+
 \subsection{Mutation}
 % Talk about methods of mutation
 % - Flipping bits/values
 
+Another method of getting variation into a population is mutation, the random
+change of genes within a chromosome. In genetic algorithms this is typically
+replicated by flipping a single bit in the chromosome.
+
+As with crossover, mutation must be handled carefully with complex chromosome
+representations as it may lead to invalid chromosomes. The rate of mutation 
+is usually kept low to avoid large amounts of variance.
+
+
 \subsection{Termination}
 % Talk about termination criteria
 
+The final problem with genetic algorithms is the problem of deciding when a 
+result is good enough. Usually the implementation has some form of termination
+criteria, this may be a time limit or number of generations or may be something
+more complex like when the algorithm no longer improves in fitness greatly.
+
+Termination criteria is very specific to the problem domain. Genetic algorithms
+are very good at giving an approximate answer and typically bad at finding the
+exact optimum solution.
+
+\FloatBarrier
 
 \newpage
-\section{The Effects of Selection Algorithms on GAs}
+\section{Previous Research into Selection Schemes}
 \label{sec:selection-algorithms}
 
 The selection of the ``best'' individuals is an important step in genetic
@@ -206,6 +281,8 @@ p_i = \frac{f_i}{\sum^N_{j=1}f_j}
 \label{eq:roulette}
 \end{equation}
 
+
+\subsection{Comparing Selection Schemes}
 There have been studies into the effects of different selection algorithms on 
 genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
 four methods of selection; proportional reproduction, ranking selection,
@@ -272,18 +349,9 @@ schemes.
 
 
 \newpage
-\section{Code Example}
-A simple python implementation is shown in figure~\ref{lst:ga.py}.
+\section{Evaluation of Research}
 
-\lstinputlisting[language=python, 
-                 caption=A Python implementation of a simple Genetic 
-                         Algorithm, 
-                 label=lst:ga.py]{code/ga.py}
-\lstinputlisting[language=python, 
-                 caption=The Graph Code for listing~\ref{lst:ga.py}, 
-                 label=lst:graph.py]{code/graph.py}
-
-
+\newpage
 \bibliographystyle{plain}
 \bibliography{citations}
 \end{document}
