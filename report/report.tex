@@ -169,10 +169,6 @@ giving those individuals with higher fitness greater chance of being selected.
 While others take inspiration from biology by making members of the population
 complete or assign individuals genders to imitate sexual reproduction.
 
-This report will discuss different selection algorithms in 
-and the methods suggested for evaluating them in 
-Section~\ref{sec:selection-algorithms}.
-
 \subsection{Crossover}
 % Talk about methods of crossover
 % - Crossover point
@@ -245,42 +241,7 @@ exact optimum solution.
 \section{Previous Research into Selection Schemes}
 \label{sec:selection-algorithms}
 
-The selection of the ``best'' individuals is an important step in genetic
-algorithms and as such several selection algorithms have been put forward.
-
-The simplest is to just pick the top individuals of a generation to carry on
-their genes in the next generation, either through directly copying them, 
-crossover or mutation.
-
-This has its flaws and doesn't mirror the biological process of evolution. The
-main flaw of this approach is that it can be beneficial to include weaker 
-members of a population to avoid getting stuck in local optimum. By including
-other, seemingly worse, members of a population, the effects of crossover and
-mutation can overcome this problem.
-
-Another, commonly used, technique is to use a tournament-based selection 
-algorithm, which involves selecting the best member from a pool made up of
-random members of the population. The size of the pool has a big effect on the
-selection of individuals, and is generally inversely proportional to the
-number of weaker members selected.
-
-Tournament selection is one of the closest to biological natural selection,
-and has the benefits that it is efficient, especially on parallel 
-architectures.
-
-Another popular selection algorithm is roulette-wheel selection, where the
-chance a particular individual has of being selected is proportional to its
-fitness. Those with a higher fitness have a higher probability of being 
-selected. The equation used to calculate the probability is shown in 
-equation~\ref{eq:roulette}, where $i$ is the individual in question, $f_x$ is
-the fitness of individual $x$ and $N$ is the number of individuals in the 
-population.
-
-\begin{equation}
-p_i = \frac{f_i}{\sum^N_{j=1}f_j}
-\label{eq:roulette}
-\end{equation}
-
+% TODO Some for of section introduction.
 
 \subsection{Comparing Selection Schemes}
 There have been studies into the effects of different selection algorithms on 
