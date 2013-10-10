@@ -349,6 +349,22 @@ is found, and is used as the basis for their results:
 \text{E}[\sigma'^2_F] = \left( 1 - \frac{\sigma^2_n}{P-1}\right) \sigma^2_F
 \end{equation}
 
+The change in fitness variation due to selection is genetic drift. This is
+dependant only on the variance of the number of times any individual population
+member is selected ($\sigma^2_n$).
+
+To get comparable analysis a ratio $r$ is defined as the change in variance 
+after one generation.
+
+\begin{align}
+r &= \frac{\text{E}[\sigma'^2_F]}{\sigma^2_F} \\
+  &= 1-\frac{\sigma^2_n}{P-1}
+\end{align}
+
+From this they concluded approximates of the genetic drift of several forms of
+selection scheme. Finding their results agreed with previous findings through
+empirical and numerical Markov chain comparisons.%TODO cite
+
 \newpage
 \section{Evaluation of Research}
 
@@ -361,20 +377,28 @@ inherently noisy nature of genetic algorithms.
 %TODO MOAR!
 
 
+
+\subsection{Evaluation of Genetic Drift in Selection Schemes}
 The work of Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} also runs 
 into this inherent problem of genetic algorithms being a form of subsymbolic 
 learning, which is very difficult to apply probabilistic methods to, due to the
 randomness used within them.
 
-The authors attempt to deal this by using results from experiments averaged 
-over 100,000 runs. Again though, a lot will depend on the nature of the 
-problem, the representation of chromosomes and even the way in which the
-selection scheme is implemented. Like with the work of Goldberg and Deb, this 
-only provides an indication of the performance of a selection scheme, rather
-than a full view. It does, however, seem to give some useful insights into 
-different selection schemes and may help rule out less useful selection 
-schemes.
+As a counter-argument to this, it does give a good idea of the sorts of
+variation in fitness a selection scheme will provide and it does prove that
+genetic drift does affect the convergence of a genetic algorithm and can be
+controlled, at least to some degree, by the selection scheme.
 
+Although the biological term has been modified to be applicable to genetic
+algorithms, it seems the authors have only taken into account the change in
+variance of fitness and not frequency of allele (gene variant) as the 
+biological term is used to describe. Although this paper does have some nice
+ideas in ways in which selection schemes can be evaluated, it does not even
+start to broach the frequency of alleles in a genetic algorithm.
+
+Of course, real genetic drift on a genetic algorithm may not be affected hugely
+by just the selection scheme, which is why the authors may have simplified the
+term.
 
 \newpage
 \bibliographystyle{plain}
