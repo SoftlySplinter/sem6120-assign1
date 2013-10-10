@@ -1,5 +1,7 @@
 \documentclass[10pt, a4paper]{article}
 
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{color}
@@ -261,10 +263,13 @@ space.
 \item Time complexity; the standard big O measure for time complexity.
 \end{enumerate}
 
-It was found that linear ranking and binary tournament (a tournament of only
-two individuals) selection had similar growth rates, but that tournament 
-selection with larger pool sizes had higher growth rates, though a non-linear
-ranking function can also achieve this.
+Linear ranking and binary tournament (a tournament with a pool size of two
+individuals) were found to have similar growth rates 
+
+%It was found that linear ranking and binary tournament (a tournament of only
+%two individuals) selection had similar growth rates, but that tournament 
+%selection with larger pool sizes had higher growth rates, though a non-linear
+%ranking function can also achieve this.
 
 Takeover times all converged in around $O(log\;n)$ generations. Most 
 interestingly the time complexities had a large range, from $O(n^2)$ to $O(n)$,
@@ -289,9 +294,60 @@ to the authors.
 In genetic algorithms, genetic drift is a measure of the change in fitness
 variation within a population and is worked out using probabilistic analysis of
 the selection scheme. 
-%TODO MOAR!
 
+To analyse genetic drift, the variation of population fitness needs to be
+calculated. Standard variance ($\sigma^2$) is applied to the initial population
+of $P$ members. Each member ($\alpha$) has fitness $F_\alpha$. Therefore the
+variance is defined as:
 
+\begin{equation}
+\sigma_F^2 = \text{E}[F^2] - (\text{E}[F])^2
+\end{equation}
+
+Calculating this out becomes:
+
+\begin{equation}
+\sigma_F^2 = \frac{1}{P}\sum^{P}_{\alpha=1}{F^{2}_{\alpha}} - \left(
+\frac{1}{P}\sum^{P}_{\alpha=1}{F_{\alpha}}\right)^2
+\end{equation}
+
+Applying a selection scheme to this population and drawing a new population of
+$P$ individuals means there will be $n_\alpha$ copies of a population member
+$F_\alpha$. The variance of the new population is given as:
+
+\begin{equation}
+\sigma'^2_F = \frac{1}{P} \sum^{P}_{\alpha=1}{n_\alpha F^2_\alpha} - \left(
+\frac{1}{P} \sum^P_{\alpha=1}{n_\alpha F_\alpha}\right)^2
+\end{equation}
+
+To get an average case the authors averaged over all the possible ways of
+performing selection. To do this they looked at neutral selection, where the
+probability of selection is due to random, neutral, occurrences and not due to
+any form of fitness of the individual. This allows $n_\alpha$ to be independent
+of $F_\alpha$. By working through this and simplifying further to use the fact
+that $P$ is kept constant, they derive:
+
+\begin{equation}
+\text{E}[\sigma'^2_F] = \frac{P - \text{E}[n^2]}{P-1}\sigma^2_F
+\label{eq:average-case}
+\end{equation}
+
+The change in population fitness variance for any selection scheme can be found
+by calculating $\text{E}[n^2]$, the expected square of the number of times any
+population member is selected.
+
+By applying the variance in the number of times any individual is simply:
+
+\begin{equation}
+\sigma^2_n = \text{E}[n^2] - (\text{E}[n])^2
+\end{equation}
+
+Substituting this into equation~\ref{eq:average-case}, the following equation
+is found, and is used as the basis for their results:
+
+\begin{equation}
+\text{E}[\sigma'^2_F] = \left( 1 - \frac{\sigma^2_n}{P-1}\right) \sigma^2_F
+\end{equation}
 
 \newpage
 \section{Evaluation of Research}
