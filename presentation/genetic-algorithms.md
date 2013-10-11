@@ -23,43 +23,27 @@ style: template/ga.css
 
 --
 
-### How does a genetic algorithm work?
-
-At a glance:
+### Recap
 
 * Solutions are represented as **chromosomes**.
-* An initial population of chromosomes is produced.
-* Each chromosome is ranked.
-* The best chromosomes are picked and carried on to the next **generation**.
-* Evolution of new chromosomes.
-* Repeat until finished.
+* An initial population of chromosomes is produced and evaluated
+* The "best" chromosomes are selected and used as parents for the next
+  generation.
+* New children are produced.
+* Children are mutated.
+* Evaluate the children
+* Discard members of the population.
+* Repeat until termination criteria reached.
 
 --
 
 ### Selection
 
-* One of the key parts of a GA.
-* To generate good offspring a method of selecting good parents is required.
-* Several forms of selection.
-
---
-
-### Roulette Wheel Selection
-
-* The probability of being chose is proportional to the fitness of the 
-  individual.
-
-![Roulette Wheel Selection](img/roulette-wheel.png "Roulette Wheel Selection")
-
---
-
-### Tournament Selection
-
-* Population split randomly into pools and the best individual in a   pool is 
-  selected.
-* Can be optimised for parallel processing.
-
-![Tournament Selection](./img/tournament.png "Tournament Selection")
+* Select the fittest members of the population.
+* Many simple types:
+  * Roulette Wheels
+  * Rank-based
+  * Tournament
 
 --
 
@@ -68,6 +52,10 @@ At a glance:
 * The artificial process of reproduction.
 * Usually involves splicing two parent chromosomes into a new offspring
   chromosome. 
+* Simplistic methods:
+  * Crossover at a single point
+  * Crossover at two points
+
 
 --
 
