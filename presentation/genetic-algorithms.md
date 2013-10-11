@@ -23,75 +23,53 @@ style: template/ga.css
 
 --
 
-### How does a genetic algorithm work?
+### Representation
 
-At a glance:
-
-* Solutions are represented as **chromosomes**.
-* An initial population of chromosomes is produced.
-* Each chromosome is ranked.
-* The best chromosomes are picked and carried on to the next **generation**.
-* Evolution of new chromosomes.
-* Repeat until finished.
+* **Genes** represent changeable parts of the problem
+* **Chromosomes** are a solution, encoded through a data structure of genes.
+* **Alleles** are the different variants a gene has.
+* **Genotype** is the encoded chromosome.
+* **Phenotype** is the real-world value of a chromosome.
 
 --
 
-### Selection
+### Crossover for Ordered Chromosomes
 
-* One of the key parts of a GA.
-* To generate good offspring a method of selecting good parents is required.
-* Several forms of selection.
+Some problems have genes which cannot be repeated within the chromosome.
 
---
-
-### Roulette Wheel Selection
-
-* The probability of being chose is proportional to the fitness of the 
-  individual.
-
-![Roulette Wheel Selection](img/roulette-wheel.png "Roulette Wheel Selection")
+"Normal" crossover will produce invalid solutions, so we needs some other
+strategies.
 
 --
 
-### Tournament Selection
+### Cycle Crossover
 
-* Population split randomly into pools and the best individual in a   pool is 
-  selected.
-* Can be optimised for parallel processing.
+![Cycle Crossover](./img/cycle-crossover.png "Cycle Crossover")
 
-![Tournament Selection](./img/tournament.png "Tournament Selection")
 
 --
 
-### Crossover
+### Sexual Crossover
 
-* The artificial process of reproduction.
-* Usually involves splicing two parent chromosomes into a new offspring
-  chromosome. 
-
---
-
-### Crossover Point
-
-![Crossover](./img/crossover.png "Crossover")
+* To future imitate real world genetics, some crossover schemes add genders 
+  into the chromosomes. 
+  * Just a limit on which chromosomes can crossover.
+  * Add selection pressures<sup>[1]</sup>.
 
 --
 
-### Crossover Mask
+### Multi-Objective Genetic Algorithm (MOGA)<sup>[2]</sup>
 
-![Crossover Mask](./img/mask-crossover.png "Crossover Mask")
-
---
-
-### Mutation
-
-* Adds variety into the new populations.
-* Simple form is to flip or swap genes.
-* Rate of mutation must be kept low to encourage improvement.
+* Normal GAs would combine the fitness function to work out the fitness.
+* MOGA uses a weighted some of the fitness functions.
+  * The weights are not fixed, but applied randomly at each selection.
 
 --
 
-### Termination
+### References
 
-* As with most AI approaches, overfitting may be a problem.
-* GAs provide a good approximation, not an absolute solution.
+**[1]** Sexual Selection with Competitive/Co-Operative Operators for Genetic
+Algorithms &mdash; *Jos&eacute; S&aacute;nchez-Velazco and John A. Bullinaria*
+
+**[2]** MOGA: Multi-Objective Genetic Algorithms &mdash; *Tadahiko Murata and
+Hisao Ishibuchi*.
