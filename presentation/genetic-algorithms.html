@@ -252,57 +252,46 @@ img {
 <li>Focus on search optimisation.</li>
 <li>Biologically inspired.</li></ul></li>
 </ul></section>
-    <section class="slide"><h3>Recap</h3>
+    <section class="slide"><h3>Representation</h3>
 
 <ul>
-<li>Solutions are represented as <strong>chromosomes</strong>.</li>
-<li>An initial population of chromosomes is produced and evaluated</li>
-<li>The "best" chromosomes are selected and used as parents for the next
-generation.</li>
-<li>New children are produced.</li>
-<li>Children are mutated.</li>
-<li>Evaluate the children</li>
-<li>Discard members of the population.</li>
-<li>Repeat until termination criteria reached.</li>
+<li><strong>Genes</strong> represent changeable parts of the problem</li>
+<li><strong>Chromosomes</strong> are a solution, encoded through a data structure of genes.</li>
+<li><strong>Alleles</strong> are the different variants a gene has.</li>
+<li><strong>Genotype</strong> is the encoded chromosome.</li>
+<li><strong>Phenotype</strong> is the real-world value of a chromosome.</li>
 </ul></section>
-    <section class="slide"><h3>Selection</h3>
+    <section class="slide"><h3>Crossover for Ordered Chromosomes</h3>
+
+<p>Some problems have genes which cannot be repeated within the chromosome.</p>
+
+<p>"Normal" crossover will produce invalid solutions, so we needs some other
+strategies.</p></section>
+    <section class="slide"><h3>Cycle Crossover</h3>
+
+<p><img src="./img/cycle-crossover.png" alt="Cycle Crossover" title="Cycle Crossover" /></p></section>
+    <section class="slide"><h3>Sexual Crossover</h3>
 
 <ul>
-<li>Select the fittest members of the population.</li>
-<li>Many simple types:
-<ul><li>Roulette Wheels</li>
-<li>Rank-based</li>
-<li>Tournament</li></ul></li>
+<li>To future imitate real world genetics, some crossover schemes add genders 
+into the chromosomes. 
+<ul><li>Just a limit on which chromosomes can crossover.</li>
+<li>Add selection pressures<sup>[1]</sup>.</li></ul></li>
 </ul></section>
-    <section class="slide"><h3>Crossover</h3>
+    <section class="slide"><h3>Multi-Objective Genetic Algorithm (MOGA)<sup>[2]</sup></h3>
 
 <ul>
-<li>The artificial process of reproduction.</li>
-<li>Usually involves splicing two parent chromosomes into a new offspring
-chromosome. </li>
-<li>Simplistic methods:
-<ul><li>Crossover at a single point</li>
-<li>Crossover at two points</li></ul></li>
+<li>Normal GAs would combine the fitness function to work out the fitness.</li>
+<li>MOGA uses a weighted some of the fitness functions.
+<ul><li>The weights are not fixed, but applied randomly at each selection.</li></ul></li>
 </ul></section>
-    <section class="slide"><h3>Crossover Point</h3>
+    <section class="slide"><h3>References</h3>
 
-<p><img src="./img/crossover.png" alt="Crossover" title="Crossover" /></p></section>
-    <section class="slide"><h3>Crossover Mask</h3>
+<p><strong>[1]</strong> Sexual Selection with Competitive/Co-Operative Operators for Genetic
+Algorithms &mdash; <em>Jos&eacute; S&aacute;nchez-Velazco and John A. Bullinaria</em></p>
 
-<p><img src="./img/mask-crossover.png" alt="Crossover Mask" title="Crossover Mask" /></p></section>
-    <section class="slide"><h3>Mutation</h3>
-
-<ul>
-<li>Adds variety into the new populations.</li>
-<li>Simple form is to flip or swap genes.</li>
-<li>Rate of mutation must be kept low to encourage improvement.</li>
-</ul></section>
-    <section class="slide"><h3>Termination</h3>
-
-<ul>
-<li>As with most AI approaches, overfitting may be a problem.</li>
-<li>GAs provide a good approximation, not an absolute solution.</li>
-</ul></section>
+<p><strong>[2]</strong> MOGA: Multi-Objective Genetic Algorithms &mdash; <em>Tadahiko Murata and
+Hisao Ishibuchi</em>.</p></section>
     <section class="slide"><div class="author">
   <h1 class="name">Alexander D Brown (adb9)</h1>
   <h3 class="twitter">

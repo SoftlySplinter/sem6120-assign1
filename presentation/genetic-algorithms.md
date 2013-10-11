@@ -23,63 +23,53 @@ style: template/ga.css
 
 --
 
-### Recap
+### Representation
 
-* Solutions are represented as **chromosomes**.
-* An initial population of chromosomes is produced and evaluated
-* The "best" chromosomes are selected and used as parents for the next
-  generation.
-* New children are produced.
-* Children are mutated.
-* Evaluate the children
-* Discard members of the population.
-* Repeat until termination criteria reached.
+* **Genes** represent changeable parts of the problem
+* **Chromosomes** are a solution, encoded through a data structure of genes.
+* **Alleles** are the different variants a gene has.
+* **Genotype** is the encoded chromosome.
+* **Phenotype** is the real-world value of a chromosome.
 
 --
 
-### Selection
+### Crossover for Ordered Chromosomes
 
-* Select the fittest members of the population.
-* Many simple types:
-  * Roulette Wheels
-  * Rank-based
-  * Tournament
+Some problems have genes which cannot be repeated within the chromosome.
+
+"Normal" crossover will produce invalid solutions, so we needs some other
+strategies.
 
 --
 
-### Crossover
+### Cycle Crossover
 
-* The artificial process of reproduction.
-* Usually involves splicing two parent chromosomes into a new offspring
-  chromosome. 
-* Simplistic methods:
-  * Crossover at a single point
-  * Crossover at two points
+![Cycle Crossover](./img/cycle-crossover.png "Cycle Crossover")
 
 
 --
 
-### Crossover Point
+### Sexual Crossover
 
-![Crossover](./img/crossover.png "Crossover")
-
---
-
-### Crossover Mask
-
-![Crossover Mask](./img/mask-crossover.png "Crossover Mask")
+* To future imitate real world genetics, some crossover schemes add genders 
+  into the chromosomes. 
+  * Just a limit on which chromosomes can crossover.
+  * Add selection pressures<sup>[1]</sup>.
 
 --
 
-### Mutation
+### Multi-Objective Genetic Algorithm (MOGA)<sup>[2]</sup>
 
-* Adds variety into the new populations.
-* Simple form is to flip or swap genes.
-* Rate of mutation must be kept low to encourage improvement.
+* Normal GAs would combine the fitness function to work out the fitness.
+* MOGA uses a weighted some of the fitness functions.
+  * The weights are not fixed, but applied randomly at each selection.
 
 --
 
-### Termination
+### References
 
-* As with most AI approaches, overfitting may be a problem.
-* GAs provide a good approximation, not an absolute solution.
+**[1]** Sexual Selection with Competitive/Co-Operative Operators for Genetic
+Algorithms &mdash; *Jos&eacute; S&aacute;nchez-Velazco and John A. Bullinaria*
+
+**[2]** MOGA: Multi-Objective Genetic Algorithms &mdash; *Tadahiko Murata and
+Hisao Ishibuchi*.
