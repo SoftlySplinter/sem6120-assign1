@@ -246,11 +246,15 @@ exact optimum solution.
 % TODO Some for of section introduction.
 
 \subsection{Comparing Selection Schemes}
+\subsubsection{Introduction}
 There have been studies into the effects of different selection algorithms on 
 genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
 four methods of selection; proportional reproduction, ranking selection,
 tournament selection and the GENITOR algorithm.%TODO cite the GENITOR.
 
+%TODO More introduction to this.
+
+\subsubsection{Comparison Techniques}
 They analysed each selection scheme in terms of:
 
 \begin{enumerate}
@@ -263,13 +267,9 @@ space.
 \item Time complexity; the standard big O measure for time complexity.
 \end{enumerate}
 
+\subsubsection{Results}
 Linear ranking and binary tournament (a tournament with a pool size of two
 individuals) were found to have similar growth rates 
-
-%It was found that linear ranking and binary tournament (a tournament of only
-%two individuals) selection had similar growth rates, but that tournament 
-%selection with larger pool sizes had higher growth rates, though a non-linear
-%ranking function can also achieve this.
 
 Takeover times all converged in around $O(log\;n)$ generations. Most 
 interestingly the time complexities had a large range, from $O(n^2)$ to $O(n)$,
@@ -278,8 +278,12 @@ tournament selection is a very easy algorithm to make parallel, this fits in
 with genetic algorithms nicely as they improve drastically from parallel 
 implementation.
 
+%TODO MOAR!
 
+
+% Paper 2
 \subsection{Genetic Drift}
+\subsubsection{Introduction}
 Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} defined a method of 
 analysing selection schemes using genetic drift, a term borrowed from biology,
 which describes the change in frequency of an allele (gene variation) through
@@ -291,6 +295,7 @@ exact analytical solution. Though previous attempts to calculate genetic drift
 were often approximations or difficult to generalise to other cases, according
 to the authors.
 
+\subsubsection{Genetic Drift}
 In genetic algorithms, genetic drift is a measure of the change in fitness
 variation within a population and is worked out using probabilistic analysis of
 the selection scheme. 
@@ -353,6 +358,7 @@ The change in fitness variation due to selection is genetic drift. This is
 dependant only on the variance of the number of times any individual population
 member is selected ($\sigma^2_n$).
 
+\subsubsection{Results}
 To get comparable analysis a ratio $r$ is defined as the change in variance 
 after one generation.
 
@@ -364,6 +370,9 @@ r &= \frac{\text{E}[\sigma'^2_F]}{\sigma^2_F} \\
 From this they concluded approximates of the genetic drift of several forms of
 selection scheme. Finding their results agreed with previous findings through
 empirical and numerical Markov chain comparisons.%TODO cite
+
+
+%TODO Paper 3
 
 \newpage
 \section{Evaluation of Research}
