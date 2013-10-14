@@ -6,6 +6,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage[section]{placeins}
+\usepackage{paralist}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -31,6 +32,7 @@
   tabsize=2,
 }
 
+\hyphenation{GENITOR}
 
 \newcommand*{\titleGM}{\begingroup
 \hbox{ 
@@ -245,45 +247,72 @@ exact optimum solution.
 
 % TODO Some for of section introduction.
 
-\subsection{Comparing Selection Schemes}
-\subsubsection{Introduction}
+\subsection{A Comparative Analysis of Selection Schemes used in Genetic
+            Algorithms}
+\paragraph{Introduction} ~\\
 There have been studies into the effects of different selection algorithms on 
 genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
 four methods of selection; proportional reproduction, ranking selection,
-tournament selection and the GENITOR algorithm.%TODO cite the GENITOR.
+tournament selection and the GENITOR algorithm\cite{Whitley1989GENITOR}.
 
 %TODO More introduction to this.
 
-\subsubsection{Comparison Techniques}
-They analysed each selection scheme in terms of:
+\paragraph{Comparison Techniques} ~\\
+Selection schemes were analysed in terms of:
 
 \begin{enumerate}
-\item growth ratio; the expected ratio for the members of the best class to the
+\item Growth ratio; the expected ratio for the members of the best class to the
 umber of members of the population.
 \item Takeover time; the approximate number of generations it takes
 to converge, this gives an idea of how long it would take before mutation,
 rather than crossover, becomes the primary method for exploring the search
 space. 
-\item Time complexity; the standard big O measure for time complexity.
+\item Time complexity using the standard big O measure.
 \end{enumerate}
 
-\subsubsection{Results}
-Linear ranking and binary tournament (a tournament with a pool size of two
-individuals) were found to have similar growth rates 
+These values were chosen to allow side-by-side comparison of each selection
+scheme and help to provide useful information as to which scheme might be
+correct for a certain scenario.
 
-Takeover times all converged in around $O(log\;n)$ generations. Most 
-interestingly the time complexities had a large range, from $O(n^2)$ to $O(n)$,
-with tournament selection being an $O(n)$. This is particularly interesting as
-tournament selection is a very easy algorithm to make parallel, this fits in
-with genetic algorithms nicely as they improve drastically from parallel 
-implementation.
+The growth ratio is defined in three points of generation;
+\begin{inparaenum}[1\upshape)]
+\item at generation $t$ ($\phi_t$),
+\item when the proportion of individuals is is insubstantial (the \textit{early}
+      ratio - $\phi_e$) and
+\item when the best individual occupies 50\% of the population (the
+      \textit{late} ratio - $\phi_l$).
+\end{inparaenum}
+
+These values are picked to give an idea of the performance in a general case for
+$\phi_t$; towards the beginning of convergence at $\phi_e$, where growth rates
+are typically high and towards the end of convergence at $\phi_l$ where growth
+rates are expected to be low.
+
+\paragraph{Results} ~\\
+Linear ranking and binary tournament (a tournament with a pool size of two
+individuals) were found to have similar growth rates. Tournaments selection
+could produce better growth rates simply through larger pool sizes, whereas
+ranking selection would need a non-linear function, making them more expensive
+to implement and run.
+
+Takeover times all converged in around $O(log\;n)$ generations. This is not at
+all surprising, given that the problem space only has a single optimum point.
+The authors note that this will not be the convergence of a real GA. The results
+of takeover time should be used to determine a rough estimate for when mutation,
+and not crossover, becomes the primary method of exploration.
+
+Most interestingly the time complexities had a large range, from $O(n^2)$ to 
+$O(n)$, with tournament selection being an $O(n)$. This is particularly 
+interesting as tournament selection is a very easy algorithm to make parallel,
+this fits in with genetic algorithms nicely as they improve drastically from 
+parallel implementation.
 
 %TODO MOAR!
 
 
 % Paper 2
-\subsection{Genetic Drift}
-\subsubsection{Introduction}
+\subsection{Genetic Drift in Selection Schemes}
+\paragraph{Introduction} ~\\
 Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} defined a method of 
 analysing selection schemes using genetic drift, a term borrowed from biology,
 which describes the change in frequency of an allele (gene variation) through
@@ -295,7 +324,7 @@ exact analytical solution. Though previous attempts to calculate genetic drift
 were often approximations or difficult to generalise to other cases, according
 to the authors.
 
-\subsubsection{Genetic Drift}
+\paragraph{Genetic Drift} ~\\
 In genetic algorithms, genetic drift is a measure of the change in fitness
 variation within a population and is worked out using probabilistic analysis of
 the selection scheme. 
@@ -358,7 +387,7 @@ The change in fitness variation due to selection is genetic drift. This is
 dependant only on the variance of the number of times any individual population
 member is selected ($\sigma^2_n$).
 
-\subsubsection{Results}
+\paragraph{Results} ~\\
 To get comparable analysis a ratio $r$ is defined as the change in variance 
 after one generation.
 
@@ -377,17 +406,35 @@ empirical and numerical Markov chain comparisons\cite{Schaffer1998Effect}.
 \newpage
 \section{Evaluation of Research}
 
+\paragraph{Evaluation of A Comparative Analysis of Selection Schemes Used in
+           Genetic Algorithms} ~\\
 The results from Goldberg and Deb\cite{Goldberg1991Comparative} should be taken
 with some scepticism as they are formulated from the pure mathematics of the 
 selection techniques and not from running experiments and the authors even 
 mention that it is only designed as a simple method to better understand the 
 \textit{expected} behaviour and suggest looking at better methods, citing the 
 inherently noisy nature of genetic algorithms.
+
+Its also notable that the results gained are not from a real scenario, rather a
+problem with a single local optimum and so results relating to convergence are
+not at all applicable to real genetic algorithms.
+
+Though a lot of the research done may not be applicable to ``real'' scenarios
+this work does help to provide some useful analysis to show what kinds of
+selection scheme might work well for a real problem; some problems might be able
+to trade off time complexity for a higher later growth rate and use the GENITOR
+algorithm, while other might require good time complexity to get a ``good
+enough'' solution quickly.
+
+The main benefit of this work is that it has sparked off a lot more
+investigation into the performance of selection schemes in genetic algorithms
+and, although this work isn't that substantial, it does provide a good starting
+point from which to build on.
 %TODO MOAR!
 
 
 
-\subsection{Evaluation of Genetic Drift in Selection Schemes}
+\paragraph{Evaluation of Genetic Drift in Selection Schemes} ~\\
 The work of Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} also runs 
 into this inherent problem of genetic algorithms being a form of subsymbolic 
 learning, which is very difficult to apply probabilistic methods to, due to the
@@ -408,6 +455,13 @@ start to broach the frequency of alleles in a genetic algorithm.
 Of course, real genetic drift on a genetic algorithm may not be affected hugely
 by just the selection scheme, which is why the authors may have simplified the
 term.
+
+Unlike the work of Goldberg and Deb, this paper does look at results from
+``real'' genetic algorithms and compares the average over several thousand 
+runs, which does agree with their probabilistic findings. Again though, this
+should be taken with a little scepticism as the tests they perform may just
+happen to agree with their findings and there is no guarantee that a different
+problem will do the same.
 
 \newpage
 \bibliographystyle{plain}
