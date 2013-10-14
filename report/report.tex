@@ -249,7 +249,7 @@ exact optimum solution.
 
 \subsection{A Comparative Analysis of Selection Schemes used in Genetic
             Algorithms}
-\paragraph{Introduction} ~\\
+\subsubsection{Introduction} 
 There have been studies into the effects of different selection algorithms on 
 genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
 four methods of selection; proportional reproduction, ranking selection,
@@ -257,7 +257,7 @@ tournament selection and the GENITOR algorithm\cite{Whitley1989GENITOR}.
 
 %TODO More introduction to this.
 
-\paragraph{Comparison Techniques} ~\\
+\subsubsection{Comparison Techniques} 
 Selection schemes were analysed in terms of:
 
 \begin{enumerate}
@@ -288,7 +288,7 @@ $\phi_t$; towards the beginning of convergence at $\phi_e$, where growth rates
 are typically high and towards the end of convergence at $\phi_l$ where growth
 rates are expected to be low.
 
-\paragraph{Results} ~\\
+\subsubsection{Results} 
 Linear ranking and binary tournament (a tournament with a pool size of two
 individuals) were found to have similar growth rates. Tournaments selection
 could produce better growth rates simply through larger pool sizes, whereas
@@ -312,7 +312,7 @@ parallel implementation.
 
 % Paper 2
 \subsection{Genetic Drift in Selection Schemes}
-\paragraph{Introduction} ~\\
+\subsubsection{Introduction} 
 Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} defined a method of 
 analysing selection schemes using genetic drift, a term borrowed from biology,
 which describes the change in frequency of an allele (gene variation) through
@@ -324,7 +324,7 @@ exact analytical solution. Though previous attempts to calculate genetic drift
 were often approximations or difficult to generalise to other cases, according
 to the authors.
 
-\paragraph{Genetic Drift} ~\\
+\subsubsection{Genetic Drift} 
 In genetic algorithms, genetic drift is a measure of the change in fitness
 variation within a population and is worked out using probabilistic analysis of
 the selection scheme. 
@@ -387,7 +387,7 @@ The change in fitness variation due to selection is genetic drift. This is
 dependant only on the variance of the number of times any individual population
 member is selected ($\sigma^2_n$).
 
-\paragraph{Results} ~\\
+\subsubsection{Results} 
 To get comparable analysis a ratio $r$ is defined as the change in variance 
 after one generation.
 
@@ -401,13 +401,65 @@ selection scheme. Finding their results agreed with previous findings through
 empirical and numerical Markov chain comparisons\cite{Schaffer1998Effect}.
 
 
-%TODO Paper 3
+\subsection{Sexual Selection with Competitive/Co-operative Operators for 
+            Genetic Algorithms}
+%TODO Write some stuff here.
+
+\subsubsection{Introduction}
+The idea assigning genders to chromosomes has been around for a long time%TODO\cite
+and is typically done to restrict the crossover processes. The work of
+S\'anchez-Velazco and Bullinaria\cite{SanchezVelazco2003Sexual} expands on this
+to use the sexual characteristics of individuals as a selection scheme.
+
+\subsubsection{Gendered Selection}
+As is normal for gendered genetic algorithms, individuals are assigned one of
+two genders: male or female. In the population, $P$, the set of females, $X$,
+and the set of males, $Y$, are such that $P = X \cup Y$ and $X \cap Y = \emptyset$.
+
+Males are selected using a regular selection scheme, in this case roulette 
+wheel selection was used. The selection function is defined as:
+
+\begin{equation}
+Sel(\phi(a))
+\end{equation}
+
+Where $a$ is the set of all individuals with the fitness function $\phi$.
+Choosing a male parent $y_{sel}$ from $y \in Y$ is such that:
+
+\begin{equation}
+y_{sel} = Sel(f(y))
+\end{equation}
+
+The female parent is then selected from $x \in X$ according to a co-operative
+fitness function, which is based on:
+\begin{inparaenum}[a\upshape)]
+\item the competitive fitness $f$,
+\item the age of the female and
+\item the improvement in fitness $\Delta f$ in the fitness of the offspring,
+      compared to the selected male mate.
+\end{inparaenum}
+
+At the initial population, $\Delta f = 0$, all following generations will have a
+value for $\Delta f$ computed for the female in the next selection process.
+
+Choosing a female parent $x_{sel}$ is such that:
+
+\begin{equation}
+x_{sel} = \frac{w_1 f(x) + w_2 \Delta f(y) + w_3 g(Age(x))}{w_1 + w_2 + w_3}
+\end{equation}
+
+Where $\Delta f(y) = f(y_{son}) - f(y_{sel})$ and $g(Age(x))$ is a scaling
+function based on the age of the female parent.
+
+
+\subsubsection{Results}
+
 
 \newpage
 \section{Evaluation of Research}
 
-\paragraph{Evaluation of A Comparative Analysis of Selection Schemes Used in
-           Genetic Algorithms} ~\\
+\subsection{Evaluation of A Comparative Analysis of Selection Schemes Used 
+               in Genetic Algorithms} 
 The results from Goldberg and Deb\cite{Goldberg1991Comparative} should be taken
 with some scepticism as they are formulated from the pure mathematics of the 
 selection techniques and not from running experiments and the authors even 
@@ -434,7 +486,7 @@ point from which to build on.
 
 
 
-\paragraph{Evaluation of Genetic Drift in Selection Schemes} ~\\
+\subsection{Evaluation of Genetic Drift in Selection Schemes} 
 The work of Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} also runs 
 into this inherent problem of genetic algorithms being a form of subsymbolic 
 learning, which is very difficult to apply probabilistic methods to, due to the
