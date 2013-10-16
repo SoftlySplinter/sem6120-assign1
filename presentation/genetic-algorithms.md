@@ -23,7 +23,7 @@ style: template/ga.css
 
 --
 
-### Representation
+### Terminology
 
 * **Genes** represent changeable parts of the problem
 * **Chromosomes** are a solution, encoded through a data structure of genes.
