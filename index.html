@@ -252,43 +252,46 @@ img {
 <li>Focus on search optimisation.</li>
 <li>Biologically inspired.</li></ul></li>
 </ul></section>
-    <section class="slide"><h3>How does a genetic algorithm work?</h3>
-
-<p>At a glance:</p>
+    <section class="slide"><h3>Terminology</h3>
 
 <ul>
-<li>Solutions are represented as <strong>chromosomes</strong>.</li>
-<li>An initial population of chromosomes is produced.</li>
-<li>Each chromosome is ranked.</li>
-<li>The best chromosomes are picked and carried on to the next <strong>generation</strong>.</li>
-<li>Evolution of new chromosomes.</li>
-<li>Repeat until finished.</li>
+<li><strong>Genes</strong> represent changeable parts of the problem</li>
+<li><strong>Chromosomes</strong> are a solution, encoded through a data structure of genes.</li>
+<li><strong>Alleles</strong> are the different variants a gene has.</li>
+<li><strong>Genotype</strong> is the encoded chromosome.</li>
+<li><strong>Phenotype</strong> is the real-world value of a chromosome.</li>
 </ul></section>
-    <section class="slide"><h3>Selection</h3>
+    <section class="slide"><h3>Crossover for Ordered Chromosomes</h3>
+
+<p>Some problems have genes which cannot be repeated within the chromosome.</p>
+
+<p>"Normal" crossover will produce invalid solutions, so we needs some other
+strategies.</p></section>
+    <section class="slide"><h3>Cycle Crossover</h3>
+
+<p><img src="./img/cycle-crossover.png" alt="Cycle Crossover" title="Cycle Crossover" /></p></section>
+    <section class="slide"><h3>Sexual Crossover</h3>
 
 <ul>
-<li>One of the key parts of a GA.</li>
-<li>To generate good offspring a method of selecting good parents is required.</li>
-<li>Several forms of selection.</li>
+<li>To future imitate real world genetics, some crossover schemes add genders 
+into the chromosomes. 
+<ul><li>Just a limit on which chromosomes can crossover.</li>
+<li>Add selection pressures<sup>[1]</sup>.</li></ul></li>
 </ul></section>
-    <section class="slide"><h3>Roulette Wheel Selection</h3>
+    <section class="slide"><h3>Multi-Objective Genetic Algorithm (MOGA)<sup>[2]</sup></h3>
 
 <ul>
-<li>The probability of being chose is proportional to the fitness of the 
-individual.</li>
-</ul>
+<li>Normal GAs would combine the fitness function to work out the fitness.</li>
+<li>MOGA uses a weighted some of the fitness functions.
+<ul><li>The weights are not fixed, but applied randomly at each selection.</li></ul></li>
+</ul></section>
+    <section class="slide"><h3>References</h3>
 
-<p><img src="img/roulette-wheel.png" alt="Roulette Wheel Selection" title="Roulette Wheel Selection" /></p></section>
-    <section class="slide"><h3>Tournament Selection</h3>
+<p><strong>[1]</strong> Sexual Selection with Competitive/Co-Operative Operators for Genetic
+Algorithms &mdash; <em>Jos&eacute; S&aacute;nchez-Velazco and John A. Bullinaria</em></p>
 
-<ul>
-<li>Population split randomly into pools and the best individual in a   pool is 
-selected.</li>
-<li>Can be optimised for parallel processing.</li>
-</ul>
-
-<p><img src="./img/tournament.png" alt="Tournament Selection" title="Tournament Selection" /></p></section>
-    <section class="slide"></section>
+<p><strong>[2]</strong> MOGA: Multi-Objective Genetic Algorithms &mdash; <em>Tadahiko Murata and
+Hisao Ishibuchi</em>.</p></section>
     <section class="slide"><div class="author">
   <h1 class="name">Alexander D Brown (adb9)</h1>
   <h3 class="twitter">
@@ -416,15 +419,31 @@ window.onload = function () {
   var page = window.location.hash.slice(1);
   if (page) goToPage(page);
 
+  var queryPage = "";
+
   document.onkeydown = function (e) {
     var kc = e.keyCode;
 
-    // left, down, H, J, backspace - BACK
-    // up, right, K, L, space, enter - FORWARD
-    if (kc == 37 || kc == 40 || kc == 8 || kc == 72 || kc == 74) {
+    // left, down, H, J, backspace, PgUp - BACK
+    // up, right, K, L, space, PgDn - FORWARD
+    // enter - GO TO PAGE or FORWARD
+    // escape - CLEAR PAGE NUMBER
+    // numbers (0-9) - PAGE NUMBER
+    if (kc == 37 || kc == 40 || kc == 8 || kc == 72 || kc == 74 || kc == 33) {
       goBack();
-    } else if (kc == 38 || kc == 39 || kc == 13 || kc == 32 || kc == 75 || kc == 76) {
+    } else if (kc == 38 || kc == 39 || kc == 32 || kc == 75 || kc == 76 || kc == 34) {
       goForward();
+    } else if (kc == 27) {
+      queryPage = "";
+    } else if (kc == 13) {
+      if(!queryPage) {
+        goForward();
+      } else {
+        goToPage(queryPage);
+        queryPage = "";
+      }
+    } else if ([48, 49, 50, 51, 52, 53, 54, 55, 56, 57].indexOf(kc) > -1) {
+      queryPage += "" + (kc - 48);
     }
   }
 
