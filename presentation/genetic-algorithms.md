@@ -73,3 +73,79 @@ Algorithms &mdash; *Jos&eacute; S&aacute;nchez-Velazco and John A. Bullinaria*
 
 **[2]** MOGA: Multi-Objective Genetic Algorithms &mdash; *Tadahiko Murata and
 Hisao Ishibuchi*.
+
+--
+<!-- 8 -->
+
+--
+<!-- 9 -->
+
+--
+<!-- 10 -->
+
+--
+
+### Cycle Crossover - Detail
+
+* Randomly choose point a `i` within the chromosomes.
+* Do:
+  * Replace the allele from point `i` in `P1` with the allele from point `i` in
+    `P2`.
+  * `i` is set to be the index of the current removed allele in `P2`
+* While the current removed allele isn't the first removed one.
+
+--
+
+### Cycle Crossover - Detail
+
+* This keeps parts of the tour the same.
+* Not as good as preserving parts of the tour as other algorithms
+  * Compare Order 1 crossover.
+
+--
+<!-- 13 -->
+
+--
+<!-- 14 -->
+
+--
+<!-- 15 -->
+
+--
+<!-- 16 -->
+
+--
+<!-- 17 -->
+
+--
+<!-- 18 -->
+
+--
+<!-- 19 -->
+
+--
+<!-- 20 -->
+
+--
+
+### Sexual Crossover and Selection
+
+* Generally sexual crossover is just a limiting factor on crossover.
+* Recently, sexual characteristics have been used to enhance selection.
+
+--
+
+### Co-operative Selection
+
+* Males are selected with a normal selection scheme.
+* Females are selected based on:
+  * Their co-operative fitness with their partner.
+  * Their age.
+  * The improvement in fitness between their child and its father.
+
+--
+
+### Co-operative Selection
+
+* Shown to have improvements, based on the TSP.
+* Parallelisable (assuming the selection scheme used to select males is).
