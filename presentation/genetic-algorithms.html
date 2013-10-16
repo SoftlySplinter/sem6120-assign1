@@ -292,6 +292,55 @@ Algorithms &mdash; <em>Jos&eacute; S&aacute;nchez-Velazco and John A. Bullinaria
 
 <p><strong>[2]</strong> MOGA: Multi-Objective Genetic Algorithms &mdash; <em>Tadahiko Murata and
 Hisao Ishibuchi</em>.</p></section>
+    <section class="slide"><!-- 8 --></section>
+    <section class="slide"><!-- 9 --></section>
+    <section class="slide"><!-- 10 --></section>
+    <section class="slide"><h3>Cycle Crossover - Detail</h3>
+
+<ul>
+<li>Randomly choose point a <code>i</code> within the chromosomes.</li>
+<li>Do:
+<ul><li>Replace the allele from point <code>i</code> in <code>P1</code> with the allele from point <code>i</code> in
+<code>P2</code>.</li>
+<li><code>i</code> is set to be the index of the current removed allele in <code>P2</code></li></ul></li>
+<li>While the current removed allele isn't the first removed one.</li>
+</ul></section>
+    <section class="slide"><h3>Cycle Crossover - Detail</h3>
+
+<ul>
+<li>This keeps parts of the tour the same.</li>
+<li>Not as good as preserving parts of the tour as other algorithms
+<ul><li>Compare Order 1 crossover.</li></ul></li>
+</ul></section>
+    <section class="slide"><!-- 13 --></section>
+    <section class="slide"><!-- 14 --></section>
+    <section class="slide"><!-- 15 --></section>
+    <section class="slide"><!-- 16 --></section>
+    <section class="slide"><!-- 17 --></section>
+    <section class="slide"><!-- 18 --></section>
+    <section class="slide"><!-- 19 --></section>
+    <section class="slide"><!-- 20 --></section>
+    <section class="slide"><h3>Sexual Crossover and Selection</h3>
+
+<ul>
+<li>Generally sexual crossover is just a limiting factor on crossover.</li>
+<li>Recently, sexual characteristics have been used to enhance selection.</li>
+</ul></section>
+    <section class="slide"><h3>Co-operative Selection</h3>
+
+<ul>
+<li>Males are selected with a normal selection scheme.</li>
+<li>Females are selected based on:
+<ul><li>Their co-operative fitness with their partner.</li>
+<li>Their age.</li>
+<li>The improvement in fitness between their child and its father.</li></ul></li>
+</ul></section>
+    <section class="slide"><h3>Co-operative Selection</h3>
+
+<ul>
+<li>Shown to have improvements, based on the TSP.</li>
+<li>Parallelisable (assuming the selection scheme used to select males is).</li>
+</ul></section>
     <section class="slide"><div class="author">
   <h1 class="name">Alexander D Brown (adb9)</h1>
   <h3 class="twitter">
