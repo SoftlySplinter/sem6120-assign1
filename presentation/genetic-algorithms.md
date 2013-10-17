@@ -46,7 +46,6 @@ strategies.
 
 ![Cycle Crossover](./img/cycle-crossover.png "Cycle Crossover")
 
-
 --
 
 ### Sexual Crossover
@@ -54,11 +53,11 @@ strategies.
 * To future imitate real world genetics, some crossover schemes add genders 
   into the chromosomes. 
   * Just a limit on which chromosomes can crossover.
-  * Add selection pressures<sup>[1]</sup>.
+  * Add selection pressures<sup>[[1](#21)]</sup>.
 
 --
 
-### Multi-Objective Genetic Algorithm (MOGA)<sup>[2]</sup>
+### Multi-Objective Genetic Algorithm (MOGA)<sup>[[2](#31)]</sup>
 
 * Normal GAs would combine the fitness function to work out the fitness.
 * MOGA uses a weighted some of the fitness functions.
@@ -76,13 +75,10 @@ Hisao Ishibuchi*.
 
 --
 <!-- 8 -->
-
 --
 <!-- 9 -->
-
 --
 <!-- 10 -->
-
 --
 
 ### Cycle Crossover - Detail
@@ -104,28 +100,20 @@ Hisao Ishibuchi*.
 
 --
 <!-- 13 -->
-
 --
 <!-- 14 -->
-
 --
 <!-- 15 -->
-
 --
 <!-- 16 -->
-
 --
 <!-- 17 -->
-
 --
 <!-- 18 -->
-
 --
 <!-- 19 -->
-
 --
 <!-- 20 -->
-
 --
 
 ### Sexual Crossover and Selection
@@ -149,3 +137,33 @@ Hisao Ishibuchi*.
 
 * Shown to have improvements, based on the TSP.
 * Parallelisable (assuming the selection scheme used to select males is).
+
+--
+<!-- 24 -->
+--
+<!-- 25 -->
+--
+<!-- 26 -->
+--
+<!-- 27 -->
+--
+<!-- 28 -->
+--
+<!-- 29 -->
+--
+<!-- 30 -->
+--
+
+### Multi-Objective Genetic Algorithms
+
+* Trying to optimise two or more functions.
+* Can't always just weight the functions;
+  * Unknown precedence
+
+--
+
+### Multi-Objective Genetic Algorithms
+
+* Randomly weight the fitness functions to get provide more all-encompassing
+  results.
+* Elite Preservation.
