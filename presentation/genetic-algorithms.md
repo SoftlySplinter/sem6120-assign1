@@ -166,3 +166,4 @@ Hisao Ishibuchi*.
 
 * Randomly weight the fitness functions to get provide more all-encompassing
   results.
+* Elite Preservation.
