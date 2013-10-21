@@ -245,10 +245,16 @@ exact optimum solution.
 \section{Previous Research into Selection Schemes}
 \label{sec:selection-algorithms}
 
-% TODO Some for of section introduction.
+This report focuses on reviewing previous research into selection schemes,
+focusing mainly on analysis of commonly used selection schemes through a range
+of methods, as well as viewing some more advanced techniques which are being
+used in recent years.
 
-\subsection{A Comparative Analysis of Selection Schemes used in Genetic
-            Algorithms}
+This section will briefly introduce each paper to give a general overview on
+each. The following section will then go on to critically evaluate each paper
+and start to draw conclusions on the research done.
+
+\subsection{A Comparative Analysis of Selection Schemes used in Genetic Algorithms}
 \subsubsection{Introduction} 
 There have been studies into the effects of different selection algorithms on 
 genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
@@ -307,10 +313,6 @@ interesting as tournament selection is a very easy algorithm to make parallel,
 this fits in with genetic algorithms nicely as they improve drastically from 
 parallel implementation.
 
-%TODO MOAR!
-
-
-% Paper 2
 \subsection{Genetic Drift in Selection Schemes}
 \subsubsection{Introduction} 
 Rogers and Pr\"{u}gel-Bennett\cite{Rogers1999Genetic} defined a method of 
@@ -401,15 +403,18 @@ selection scheme. Finding their results agreed with previous findings through
 empirical and numerical Markov chain comparisons\cite{Schaffer1998Effect}.
 
 
-\subsection{Sexual Selection with Competitive/Co-operative Operators for 
-            Genetic Algorithms}
-%TODO Write some stuff here.
+\subsection{Sexual Selection with Competitive/Co-operative Operators for Genetic Algorithms}
 
 \subsubsection{Introduction}
 The idea assigning genders to chromosomes has been around for a long time%TODO\cite
 and is typically done to restrict the crossover processes. The work of
 S\'anchez-Velazco and Bullinaria\cite{SanchezVelazco2003Sexual} expands on this
-to use the sexual characteristics of individuals as a selection scheme.
+to use the sexual characteristics of individuals as a part of selection, as 
+well as being a part of crossover.
+
+This process is designed to mimic more closely the process of natural evolution
+where there are real selection pressures, not only on individuals, but on
+mating pairs too.
 
 \subsubsection{Gendered Selection}
 As is normal for gendered genetic algorithms, individuals are assigned one of
@@ -453,13 +458,30 @@ function based on the age of the female parent.
 
 
 \subsubsection{Results}
+The authors used the Travelling Salesman Problem to test this method for
+selection and crossover. The results were averaged over 100 experimental runs
+with a population size of 200.
+
+Comparing against a standard genetic algorithm in a problem with 20 cities, the
+gendered GA was found to have consistently better average fitness of both the
+whole population and the best individual. The latter of which reached the
+optimal fitness, while the standard GA only reached a fitness of $\frac{3}{4}$
+the optimal.
+
+Increasing the problem to have 50 cities, the gendered GA is found to have a
+much faster increase in fitness compared to a standard GA, again in terms of
+average fitness for the whole population and the best individual. More metrics
+were also applied to both the gendered and standard GAs to find out the
+resilience to noise and high mutation rates. Again the gendered GA outperforms
+the standard one, this is fairly intuitive as the selection strategy helps
+maintain a more ``stable'' population as the competition is only between
+individuals of the same gender.
 
 
 \newpage
 \section{Evaluation of Research}
 
-\subsection{Evaluation of A Comparative Analysis of Selection Schemes Used 
-               in Genetic Algorithms} 
+\subsection{Evaluation of A Comparative Analysis of Selection Schemes Used in Genetic Algorithms} 
 The results from Goldberg and Deb\cite{Goldberg1991Comparative} should be taken
 with some scepticism as they are formulated from the pure mathematics of the 
 selection techniques and not from running experiments and the authors even 
@@ -514,6 +536,36 @@ runs, which does agree with their probabilistic findings. Again though, this
 should be taken with a little scepticism as the tests they perform may just
 happen to agree with their findings and there is no guarantee that a different
 problem will do the same.
+
+
+\subsection{Evaluation of Sexual Selection with Competative/Co-operative operators for Genetic Algorithms}
+The first problem with the experimental results from the work of 
+Sanchez-Velazco and Bullinaria\cite{SanchezVelazco2003Sexual} is the limited
+number of experimental runs performed. Even though the results are fairly
+conclusive in favour of the gendered genetic algorithm the random nature of
+genetic algorithms would leave some doubt as to whether 100 runs are enough to
+prove such a great enhancement.
+
+Another noticeable flaw is the application of the selection scheme to only a
+single problem; the Travelling Salesman Problem is a very specialised problem
+for genetic algorithms and other forms of problems which require unordered
+chromosomes have been completely ignored.
+
+This work does start to bridge the gap between genetic algorithms and other
+forms of evolutionary algorithms, particularly swarm-based algorithms like
+Particle Swarm Optimisation where the individuals have some knowledge of other
+individuals in the populations.
+
+The results of this work are encouraging and the improvement, despite all the
+problems with the methods used to measure it, is impressive. For those applying
+GAs to the Travelling Salesman Problem this is definitely worth the time it
+would take to implement and should at least be at note for other problem
+domains.
+
+The other potential issue with this technique is the addition of a second
+mutation rate, one for each gender. Rather than having to set a single mutation
+rate, there is an extra parameter which may add unneeded complexity to the
+algorithm.
 
 \newpage
 \bibliographystyle{plain}
