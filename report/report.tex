@@ -70,13 +70,13 @@ solution is a long, maybe even impossible, task. At the same time the
 uncertainty needs to be reduced so that the knowledge of \textit{available}
 options can be increased.
 
-% TODO improve this section as its mainly from the reference.
 The initial design for a genetic algorithm was a method for moving from one
 population of chromosomes to another using a form of natural selection. This
 algorithm also included methods for crossover, mutation and inversion. This
-idea of having a large population was the distinguishing feature from any past
-attempts which had only considered the parent and one offspring, where the 
-offspring was simply a mutation of the parent\cite{Mitchell1996Introduction}.
+idea of having a large interbreeding population was the distinguishing feature 
+from any past attempts which had only considered the parent and one offspring, 
+where the offspring was simply a mutation of the 
+parent\cite{Mitchell1996Introduction}.
 
 
 \subsection{Evolutionary Algorithms}
@@ -159,7 +159,7 @@ a population can then be selected.
 As the value returned from a fitness function, with be specific to the domain 
 it has be used within, it is necessary to rescale the fitness value to ensure 
 uniformity when genetic algorithms are applied over several different domains
-at the same time. %TODO citation needed.
+at the same time.
 
 
 \subsection{Selection}
@@ -255,13 +255,22 @@ each. The following section will then go on to critically evaluate each paper
 and start to draw conclusions on the research done.
 
 \subsection{A Comparative Analysis of Selection Schemes used in Genetic Algorithms}
-\subsubsection{Introduction} 
-There have been studies into the effects of different selection algorithms on 
-genetic algorithms. Goldberg and Deb\cite{Goldberg1991Comparative} compared
-four methods of selection; proportional reproduction, ranking selection,
-tournament selection and the GENITOR algorithm\cite{Whitley1989GENITOR}.
+\subsubsection{Introduction}
 
-%TODO More introduction to this.
+Goldberg and Deb\cite{Goldberg1991Comparative} were the first in the area to
+apply mathematical analysis to selection schemes. Through the application of
+four different analysis techniques they compared four methods of  selection; 
+proportional reproduction, ranking selection, tournament selection and the 
+GENITOR algorithm\cite{Whitley1989GENITOR}.
+
+From this they were able to perform side-by-side comparison of these four
+schemes and given useful information to those implementing genetic algorithms as
+to what selection schemes would be useful to which problem domains.
+
+Though this is old research it sets the background for newer items and has
+sparked a lot of interest into the area. It also is still applicable today as
+complex selection schemes tend to be more domain specific, while older schemes,
+like tournament selection are still popular to this day.
 
 \subsubsection{Comparison Techniques} 
 Selection schemes were analysed in terms of:
@@ -399,14 +408,38 @@ r &= \frac{\text{E}[\sigma'^2_F]}{\sigma^2_F} \\
 \end{align}
 
 From this they concluded approximates of the genetic drift of several forms of
-selection scheme. Finding their results agreed with previous findings through
-empirical and numerical Markov chain comparisons\cite{Schaffer1998Effect}.
+selection scheme.
 
+
+The approximates are as follows:
+
+\begin{itemize}
+\item Generational Selection: $r = 1 - \frac{1}{P}$
+\item Steady State Selection: $r \approx 1 - \frac{2}{P}$
+\item Generation Gap $G$ Selection: $r \approx 1 - \frac{2 - G}{P}$
+\item CHC Algorithm: $r \approx 1 - \frac{1}{2P}$
+\end{itemize}
+
+The ratio for generational selection is intuitive as it is the result of
+sampling $P$ times with replacement from a finite population.
+
+The other ratios are also known to be good approximates; previous 
+research \cite{rogers1999modelling}
+has already shown that the rate of genetic drift in steady state selection is
+double that of generational selection. It also follows that varying the
+generation gap $G$ should produce a smooth progression between these two.
+
+The approximation for the CHC algorithm is in agreement with empirical and 
+numerical Markov chain comparisons by Schaffer 
+\textit{et al.}\cite{Schaffer1998Effect}.
+
+All these approximations were also very close to the simulated results
+of a population of 100 chromosomes, averaged over $10000$ runs.
 
 \subsection{Sexual Selection with Competitive/Co-operative Operators for Genetic Algorithms}
 
 \subsubsection{Introduction}
-The idea assigning genders to chromosomes has been around for a long time%TODO\cite
+The idea assigning genders to chromosomes has been around for a long time
 and is typically done to restrict the crossover processes. The work of
 S\'anchez-Velazco and Bullinaria\cite{SanchezVelazco2003Sexual} expands on this
 to use the sexual characteristics of individuals as a part of selection, as 
@@ -491,7 +524,9 @@ inherently noisy nature of genetic algorithms.
 
 Its also notable that the results gained are not from a real scenario, rather a
 problem with a single local optimum and so results relating to convergence are
-not at all applicable to real genetic algorithms.
+not at all applicable to real genetic algorithms. No experimental results for
+real usage of the selection schemes is used to back up the results the authors
+gained.
 
 Though a lot of the research done may not be applicable to ``real'' scenarios
 this work does help to provide some useful analysis to show what kinds of
@@ -503,9 +538,13 @@ enough'' solution quickly.
 The main benefit of this work is that it has sparked off a lot more
 investigation into the performance of selection schemes in genetic algorithms
 and, although this work isn't that substantial, it does provide a good starting
-point from which to build on.
-%TODO MOAR!
+point from which many other research have built upon.
 
+Although there are a lot of flaw with this early research, it has provided a
+useful stepping stone for other research and, despite its age, does still
+provide a lot of useful information for those who plan to use selection schemes
+especially in the later sections which deal with the future of selection
+schemes.
 
 
 \subsection{Evaluation of Genetic Drift in Selection Schemes} 
@@ -533,9 +572,9 @@ term.
 Unlike the work of Goldberg and Deb, this paper does look at results from
 ``real'' genetic algorithms and compares the average over several thousand 
 runs, which does agree with their probabilistic findings. Again though, this
-should be taken with a little scepticism as the tests they perform may just
-happen to agree with their findings and there is no guarantee that a different
-problem will do the same.
+should be taken with a little scepticism as there is little information on what
+sorts of problem domain(s) were used and it could be that the problems that the
+genetic algorithm was applied to was chosen to best match their results.
 
 
 \subsection{Evaluation of Sexual Selection with Competative/Co-operative operators for Genetic Algorithms}
@@ -566,6 +605,12 @@ The other potential issue with this technique is the addition of a second
 mutation rate, one for each gender. Rather than having to set a single mutation
 rate, there is an extra parameter which may add unneeded complexity to the
 algorithm.
+
+All in all, it does seem like this work could have some really useful
+applications and, although it does seem like it would take a lot of work to find
+the right parameters for several parts of the algorithm, it definitely would be
+a useful addition to existing selection schemes and would not require much
+additional implementation to get it working on an existing system.
 
 \newpage
 \bibliographystyle{plain}
