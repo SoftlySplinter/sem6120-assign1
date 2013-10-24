@@ -70,7 +70,6 @@ solution is a long, maybe even impossible, task. At the same time the
 uncertainty needs to be reduced so that the knowledge of \textit{available}
 options can be increased.
 
-% TODO improve this section as its mainly from the reference.
 The initial design for a genetic algorithm was a method for moving from one
 population of chromosomes to another using a form of natural selection. This
 algorithm also included methods for crossover, mutation and inversion. This
@@ -409,14 +408,38 @@ r &= \frac{\text{E}[\sigma'^2_F]}{\sigma^2_F} \\
 \end{align}
 
 From this they concluded approximates of the genetic drift of several forms of
-selection scheme. Finding their results agreed with previous findings through
-empirical and numerical Markov chain comparisons\cite{Schaffer1998Effect}.
+selection scheme.
 
+
+The approximates are as follows:
+
+\begin{itemize}
+\item Generational Selection: $r = 1 - \frac{1}{P}$
+\item Steady State Selection: $r \approx 1 - \frac{2}{P}$
+\item Generation Gap $G$ Selection: $r \approx 1 - \frac{2 - G}{P}$
+\item CHC Algorithm: $r \approx 1 - \frac{1}{2P}$
+\end{itemize}
+
+The ratio for generational selection is intuitive as it is the result of
+sampling $P$ times with replacement from a finite population.
+
+The other ratios are also known to be good approximates; previous 
+research \cite{rogers1999modelling}
+has already shown that the rate of genetic drift in steady state selection is
+double that of generational selection. It also follows that varying the
+generation gap $G$ should produce a smooth progression between these two.
+
+The approximation for the CHC algorithm is in agreement with empirical and 
+numerical Markov chain comparisons by Schaffer 
+\textit{et al.}\cite{Schaffer1998Effect}.
+
+All these approximations were also very close to the simulated results
+of a population of 100 chromosomes, averaged over $10000$ runs.
 
 \subsection{Sexual Selection with Competitive/Co-operative Operators for Genetic Algorithms}
 
 \subsubsection{Introduction}
-The idea assigning genders to chromosomes has been around for a long time%TODO\cite
+The idea assigning genders to chromosomes has been around for a long time
 and is typically done to restrict the crossover processes. The work of
 S\'anchez-Velazco and Bullinaria\cite{SanchezVelazco2003Sexual} expands on this
 to use the sexual characteristics of individuals as a part of selection, as 
